@@ -8,9 +8,9 @@ export default function Nav() {
         Study With Buddies
       </Link>
       <ul>
-        <CustomLink to="/findbuddy">Find Buddies</CustomLink>
-        <CustomLink to="/joingroup">Join Group</CustomLink>
-        <CustomLink to="/creategroup">Create Group</CustomLink>
+        <CustomLink to="/findbuddy"><b>Find Buddies</b></CustomLink>
+        <CustomLink to="/joingroup"><b>Join Group</b></CustomLink>
+        <CustomLink to="/creategroup"><b>Create Group</b></CustomLink>
         <CustomLink to="/profile"><CgProfile size={35}/></CustomLink>
       </ul>
     </nav>

@@ -1,3 +1,7 @@
+.feature-box {
+  align-items: center;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -16,8 +20,23 @@ body {
   padding: 0.5rem 1rem;
 }
 
+.box-style {
+  border: 5px solid #6ed0d4;
+  padding-bottom: 10px;
+}
+
 .title {
   font-size: 2.5rem;
+  font-family: "Marker Felt", "fantasy";
+}
+
+.home-title {
+  font-size: 4rem;
+  font-family: "Marker Felt", "fantasy";
+}
+
+.home-subtitle {
+  font-size: 2rem;
   font-family: "Marker Felt", "fantasy";
 }
 
