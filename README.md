@@ -9,3 +9,5 @@
 ## npm start
 
 ## Go to http://localhost:3000/ to see the app
+
+## Written by Ryan Tang, Arav Pant, Sunny Vinay, Krishna Kumanan, and Anish Goswami
