@@ -6,6 +6,12 @@
 
 ## npm i --legacy-peer-deps --strict-peer-deps --force
 
+## npm install concurrently --save-dev --legacy-peer-deps
+
+## npm i react-router-dom --legacy-peer-deps
+
+## npm install axios --legacy-peer-deps
+
 ## npm start
 
 ## Go to http://localhost:3000/ to see the app
