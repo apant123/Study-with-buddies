@@ -1,5 +1,6 @@
 import React from 'react';
-import { Stack, TextField, Button } from '@mui/material';
+import { Stack, TextField, Button, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   return (
@@ -16,6 +17,9 @@ export default function Login() {
       <Button variant="contained" color="primary">
         Login
       </Button>
+      <Typography variant="body2" style={{ marginTop: 20 }}>
+        Don't have an account? <Link to="/signup">Sign up</Link>
+      </Typography>
     </Stack>
   );
 }
