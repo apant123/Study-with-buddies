@@ -35,7 +35,7 @@ const userSchema = new Schema({
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'Event' // Replace 'Event' with the name of your event model, if applicable
     // }],
-    
+
     groupsCreated: {
         type: Number,
         required: true,
