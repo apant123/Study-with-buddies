@@ -1,5 +1,9 @@
 # Study With Buddies
 
+# A website to find study groups for shared classes!
+
+## To get started, follow the instructions below:
+
 ## git clone https://github.com/SunnyGotSkillz/study-with-buddies.git
 
 ## cd study-with-buddies
