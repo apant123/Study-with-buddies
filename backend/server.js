@@ -1,41 +1,31 @@
+require('dotenv').config();
+
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const mongoose = require('mongoose')
+const eventRoutes = require('./routes/events')
+const userRoutes = require('./routes/user')
+const uri = "mongodb+srv://aravpant17:E9lDK3ziORyTkPJM@35l.3doatcn.mongodb.net/?retryWrites=true&w=majority&appName=35L"
 
+// express app instantiation
 const app = express();
-const port = 5000;
+app.use(express.json())
 
-app.use(cors());
-app.use(bodyParser.json());
+app.use((req, res, next) => {
+  console.log(req.path, req.method);
+  next()
+})
 
-const users = []; // This should be replaced with a database in a real-world application.
+// routing
+app.use('/api/events', eventRoutes)
+app.use('/api/user', userRoutes)
 
-
-app.post('/api/signup', async (req, res) => {
-  try {
-    // Assume user is created successfully
-    const user = await User.create(req.body);
-    res.status(201).json({ data: user });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-
-
-app.post('/api/login', async (req, res) => {
-  const { username, password } = req.body;
-  const user = users.find(u => u.username === username);
-  if (user && await bcrypt.compare(password, user.password)) {
-    const token = jwt.sign({ username }, 'your_jwt_secret', { expiresIn: '1h' });
-    res.send({ token });
-  } else {
-    res.status(401).send({ message: 'Invalid credentials' });
-  }
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+// db connect
+mongoose.connect(uri) //process.env.MONGO_URI)
+  .then(() => { 
+    app.listen(4000, () => { //process.env.PORT
+      console.log('Connected to db and listening on port 4000!');
+    })
+  })
+  .catch((error) => {
+    console.log(error)
+  })
