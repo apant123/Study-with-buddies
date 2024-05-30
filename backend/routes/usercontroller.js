@@ -22,15 +22,55 @@ const loginUser = async (req, res) => {
     }
 }
 
-// signup user
 const signupUser = async (req, res) => {
-    const { email, password, userName, fullName, age, sports, eventsCreated } = req.body
+    const { email, password, userName } = req.body;
+
+    // Validate input data
+    if (!email || !password || !userName) {
+        return res.status(400).json({ error: "Please provide email, password, and username." });
+    }
+
     try {
-        const user = await User.signup(email, password, userName, fullName, age, sports, eventsCreated)
-        const token = createToken(user._id)
-        res.status(200).json({email, token,  userId: user._id })
+        // Call signup method, assuming it handles validation and hashing
+        const user = await User.signup(email, password, userName);
+
+        // Assuming createToken generates a JWT
+        const token = createToken(user._id);
+
+        // Respond with token and non-sensitive user data
+        res.status(200).json({ email, token });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+const getAllUsers = async (req, res) => {
+    const users = await User.find({}).sort({createdAt: -1})
+    res.status(200).json(users)
+}
+
+
+const getUsers = async(req, res) => {
+    const { sports } = req.body
+    try {
+        const users = await User.findMatches(sports)
+        if (!users){
+            res.status(200).json("No matches")
+        }
+        else {
+            res.status(200).json({users})
+        }
     } catch (error) {
         res.status(400).json({error: error.message})
     }
 }
 
+
+
+
+module.exports = { 
+    loginUser, 
+    signupUser, 
+    getUsers,
+    getAllUsers,
+}
