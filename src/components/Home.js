@@ -3,6 +3,7 @@ import { MdGroupAdd } from "react-icons/md";
 import { FaPeopleGroup, FaHeartCirclePlus } from "react-icons/fa6";
 
 
+
 export default function Home() {
   return (
     <>
