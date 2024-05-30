@@ -4,7 +4,7 @@
 
 ## cd study-with-buddies
 
-## npm install
+## npm i --legacy-peer-deps --strict-peer-deps --force
 
 ## npm start
 
