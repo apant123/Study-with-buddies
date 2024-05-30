@@ -16,10 +16,10 @@ function App() {
       <Nav/>
       <div className="container">
         <Routes>
-          <Route path="/findbuddy" element={<FindBuddy/>} />
-          <Route path="/joingroup" element={<JoinGroup/>} />
-          <Route path="/creategroup" element={<CreateGroup/>} />
-          <Route path="/profile" element={<Profile/>} />
+          <Route path="/findbuddy" element={<Login/>} />
+          <Route path="/joingroup" element={<Login/>} />
+          <Route path="/creategroup" element={<Login/>} />
+          <Route path="/profile" element={<Login/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/" element={<Home/>} />
