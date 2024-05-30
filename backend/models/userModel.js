@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
 const validator = require('validator')
-
+const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
@@ -84,6 +83,7 @@ userSchema.statics.signup = async function(email, password, userName, fullName, 
     
     return userData
 }
+
 
 userSchema.statics.findMatches = async function(userCourses) {
     const users = await this.find({
