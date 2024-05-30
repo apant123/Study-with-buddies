@@ -1,8 +1,12 @@
+import React from 'react';
 import { Stack, Button } from '@mui/material';
 import { MdGroupAdd } from "react-icons/md";
 import { FaPeopleGroup, FaHeartCirclePlus } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
+  const navigate = useNavigate();
+
   return (
     <>
       <h1 className="home-title">Welcome to UCLA's premier study group app!</h1>
@@ -26,7 +30,7 @@ export default function Home() {
         </Stack>
       </div>
       <div style={{ marginTop: 40, textAlign: 'center' }}>
-        <Button variant="contained" color="primary" size="large">
+        <Button variant="contained" color="primary" size="large" onClick={() => navigate('/login')}>
           Login
         </Button>
       </div>
