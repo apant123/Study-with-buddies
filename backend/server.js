@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose')
-const eventRoutes = require('./routes/groupcontroller')
+const groupRoutes = require('./routes/groupcontroller')
 const userRoutes = require('./routes/usercontroller')
 const uri = "mongodb+srv://aravpant17:E9lDK3ziORyTkPJM@35l.3doatcn.mongodb.net/?retryWrites=true&w=majority&appName=35L"
 
@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 })
 
 // routing
-app.use('/api/events', eventRoutes)
+app.use('/api/groups', groupRoutes)
 app.use('/api/user', userRoutes)
 
 // db connect
