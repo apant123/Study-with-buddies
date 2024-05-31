@@ -1,14 +1,16 @@
-const express = require('express');
-const group = require('..models/groupModel')
+const express = require('express')
+const route  = express.Router()
+const cors = require('cors');
 
-
-const route = express.Router()
-
-const {
-    createGroup,
-    getGroup,
-    getAllGroups,
-    deleteGroup,
-    updateGroup
-} = require('../Controller/groupcontroller')
+// controller functions
+const { loginUser, 
+    signupUser, 
+    getUsers, 
+    updateUser, 
+    addEvent,  
+    getGroup, 
+    getAllUsers, 
+    getUserById, 
+    updateProfile, 
+    removeEvent} = require('../controllers/userController')
 
