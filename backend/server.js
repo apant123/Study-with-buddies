@@ -10,6 +10,9 @@ const uri = "mongodb+srv://aravpant17:E9lDK3ziORyTkPJM@35l.3doatcn.mongodb.net/?
 const app = express();
 app.use(express.json())
 
+
+
+
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next()
