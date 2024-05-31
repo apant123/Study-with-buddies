@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Stack, Button } from '@mui/material';
 import { MdGroupAdd } from "react-icons/md";
 import { FaPeopleGroup, FaHeartCirclePlus } from "react-icons/fa6";
@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
   const navigate = useNavigate();
+
+  const [loggedIn, setLoggedIn] = useState(false); // is user logged in?
 
   return (
     <>
@@ -29,10 +31,13 @@ export default function Home() {
           <p>Make some new study buddies by connecting with UCLA students in the same or different classes!</p>
         </Stack>
       </div>
+
       <div style={{ marginTop: 40, textAlign: 'center' }}>
-        <Button variant="contained" color="primary" size="large" onClick={() => navigate('/login')}>
-          Login
-        </Button>
+        {loggedIn ? null : 
+          <Button variant="contained" color="primary" size="large" onClick={() => navigate('/login')}>
+            Click here to login
+          </Button>
+        }
       </div>
     </>
   );
