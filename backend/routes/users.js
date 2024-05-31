@@ -14,18 +14,28 @@ const { loginUser,
     updateProfile, 
     removeEvent} = require('../controllers/userController')
 
-route.get('/', getAllGroups)
 
-route.get('/:id', getGroup)
+route.post('/login', loginUser)
+
+route.post('/signup', signupUser)
     
-route.post('/', createGroup)
+route.post('/getUsers', cors(), getUsers)
+
+route.patch('/updateUser', updateUser)
     
-route.delete('/:id', deleteGroup)
+route.patch('/addEvent/:id', addEvent)
     
-route.patch('/:id', updateGroup)
+route.patch('/removeEvent/:id', removeGroup)
+    
+route.get('/getUserEvents/:id', getUserGroup)
+    
+route.get('/getAllUsers', getAllUsers)
+    
+route.get('/getUserByID/:id', getUserById)
+    
+route.patch('/updateProfile/:id', updateProfile)
     
 module.exports = route
-
 
 
 
