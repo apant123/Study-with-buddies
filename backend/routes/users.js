@@ -24,11 +24,11 @@ route.post('/getUsers', cors(), getUsers);
 
 route.patch('/updateUser', updateUser);
 
-route.patch('/addEvent/:id', addGroup);
+route.patch('/addGroup/:id', addGroup);
 
-route.patch('/removeEvent/:id', removeGroup);
+route.patch('/removeGroup/:id', removeGroup);
 
-route.get('/getUserEvents/:id', getUserGroups); // Assuming this is the correct function name
+route.get('/getUserGroups/:id', getUserGroups); // Assuming this is the correct function name
 
 route.get('/getAllUsers', getAllUsers);
 

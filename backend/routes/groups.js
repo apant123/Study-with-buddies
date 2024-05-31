@@ -18,7 +18,6 @@ const {
 
 route.get('/', getAllGroups)
 
-
 route.get('/:id', getGroup)
   
 route.post('/', createGroup)
