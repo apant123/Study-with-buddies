@@ -8,8 +8,8 @@ const {
   signupUser,
   getUsers,
   updateUser,
-  addEvent,
-  getUserGroup, // Assuming this is imported correctly
+  addGroup,
+  getUserGroups, // Assuming this is imported correctly
   getAllUsers,
   getUserById,
   updateProfile,
@@ -24,11 +24,11 @@ route.post('/getUsers', cors(), getUsers);
 
 route.patch('/updateUser', updateUser);
 
-route.patch('/addEvent/:id', addEvent);
+route.patch('/addEvent/:id', addGroup);
 
 route.patch('/removeEvent/:id', removeGroup);
 
-route.get('/getUserEvents/:id', getUserGroup); // Assuming this is the correct function name
+route.get('/getUserEvents/:id', getUserGroups); // Assuming this is the correct function name
 
 route.get('/getAllUsers', getAllUsers);
 
