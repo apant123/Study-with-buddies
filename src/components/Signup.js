@@ -18,7 +18,7 @@ export default function Signup() {
       setEmail('');
       setPassword('');
     } catch (error) {
-      setError(error.message);
+      setError("Yo is this failing!");
       setSuccess('');
     }
   };
