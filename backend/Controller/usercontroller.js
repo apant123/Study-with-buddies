@@ -26,9 +26,11 @@ const loginUser = async (req, res) => {
 const signupUser = async (req, res) => {
     const { email, password, userName } = req.body;
 
+    console.log("signupUser called");
     // Validate input data
     if (!email || !password || !userName) {
-        return res.status(400).json({ error: "Please provide email, password, and username." });
+        //return res.status(400).json({ error: "Please provide email, password, and username." });
+        console.log("incorrect format ");
     }
 
     try {
@@ -41,7 +43,8 @@ const signupUser = async (req, res) => {
         // Respond with token and non-sensitive user data
         res.status(200).json({ email, token });
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        //res.status(400).json({ error: "some kind of error occured" });
+        console.log("some kind of error occured");
     }
 }
 
