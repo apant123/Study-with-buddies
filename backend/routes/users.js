@@ -12,7 +12,7 @@ const { loginUser,
     getAllUsers, 
     getUserById, 
     updateProfile, 
-    removeEvent} = require('../controllers/userController')
+    removeGroup} = require('../controllers/userController')
 
 
 route.post('/login', loginUser)

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const {ObjectId} = require('mongodb')
 const User = require('../models/userModel')
+const Groups = require('../models/groupModel')
 const jwt = require('jsonwebtoken')
 const { db } = require('../models/userModel')
 const { useInRouterContext } = require('react-router-dom')
@@ -65,12 +66,136 @@ const getUsers = async(req, res) => {
     }
 }
 
+const getUserById = async (req, res) => {
+    const userId = req.params.id;
 
+    try {
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        res.status(200).json(user);
+    } catch (error) {
+        console.error('Error fetching user:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+const getUserGroups = async(req, res) => {
+    const userId = req.params.id
+
+    if (mongoose.Types.ObjectId.isValid(userId)){// && mongoose.Types.ObjectId.isValid(eventId)) {
+        try {
+            const user = await User.findById(userId);
+        
+            if (!user) {
+              throw new Error('User not found');
+            }
+        
+            const groupIds = user.myGroups; // Assuming myGroups is an array of event IDs
+            console.log('groupIds', groupIds)
+        
+            // Assuming you have an Event model with group information
+            const Group = require('../models/groupModel'); // Replace with the actual path to your group model
+            const groups = await Group.find({ _id: { $in: groupIds } });
+            console.log('groups', groups)
+            res.status(200).json(groups)
+        } catch (error) {
+            console.log(error)
+        }
+    } else {
+        res.status(400).json({ error: 'Invalid user or group ID' });
+    }
+
+    
+}   
+
+// add an event to a user's myEvents
+const addGroup = async (req, res) => {
+    const userId = req.params.id
+    const groupId = req.body.myGroups; // Assuming you send the event ID in the request body
+
+    if (mongoose.Types.ObjectId.isValid(userId)){// && mongoose.Types.ObjectId.isValid(eventId)) {
+        db.collection('users')
+            .updateOne({_id: new ObjectId(userId)}, {$push: {myGroups: groupId}, $inc: { groupsCreated: 1 }})
+            .then(result =>{
+                res.status(200).json(result)
+            })
+            .catch(err =>{
+                res.status(500).json({error: 'Could not update the document'})
+            })
+    } else {
+        res.status(400).json({ error: 'Invalid user or event ID' });
+    }
+};
+
+// add an event to a user's myEvents
+const removeGroup = async (req, res) => {
+    const userId = req.params.id
+    const groupId = req.body.myGroups; // Assuming you send the event ID in the request body
+
+    if (mongoose.Types.ObjectId.isValid(userId)){// && mongoose.Types.ObjectId.isValid(eventId)) {
+        db.collection('users')
+            .updateOne({_id: new ObjectId(userId)}, {$pull: {myGroups: groupId}, $inc: { groupsCreated: -1 }})
+            .then(result =>{
+                res.status(200).json(result)
+            })
+            .catch(err =>{
+                res.status(500).json({error: 'Could not update the document'})
+            })
+    } else {
+        res.status(400).json({ error: 'Invalid user or event ID' });
+    }
+};
+
+
+// add an event to a user's myEvents
+const updateProfile = async (req, res) => {
+    const userId = req.params.id
+    const updates = req.body; // Assuming you send the event ID in the request body
+
+    if (mongoose.Types.ObjectId.isValid(userId)){// && mongoose.Types.ObjectId.isValid(eventId)) {
+        db.collection('users')
+            .updateOne({_id: new ObjectId(userId)}, {$set: updates})
+            .then(result =>{
+                res.status(200).json(result)
+            })
+            .catch(err =>{
+                res.status(500).json({error: 'Could not update the document'})
+            })
+    } else {
+        res.status(400).json({ error: 'Invalid user or event ID' });
+    }
+};
+
+const updateUser = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such User'})
+    }
+
+    const event = await User.findOneAndUpdate({_id: id}, {
+        ...req.body
+    })
+    if (!event) {
+        return res.status(404).json({error: 'No such User'})
+    }
+    res.status(200).json(event)
+}
 
 
 module.exports = { 
     loginUser, 
     signupUser, 
     getUsers,
+    getUserGroups,
+    updateUser,
+    addGroup,
     getAllUsers,
+    getUserById,
+    updateProfile,
+    removeGroup
 }
