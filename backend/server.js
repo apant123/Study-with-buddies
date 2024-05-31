@@ -27,5 +27,5 @@ mongoose.connect(uri) //process.env.MONGO_URI)
     })
   })
   .catch((error) => {
-    console.log(error)
+    console.log("This didn't work!!!!!!!!!!!!!!!")
   })
