@@ -66,10 +66,10 @@ userSchema.statics.signup = async function(email, password, userName) {
     if (!email || !password || !userName) {
         throw Error('Fields must be filled out')
     }
-    //if (!validator.isEmail(email)) {
-      //  throw Error('Invalid email')
-    //}
-    //if (!validator.isStrongPassword(password)) { throw Error ('Password weak')}
+    if (!validator.isEmail(email)) {
+        throw Error('Invalid email')
+    }
+    if (!validator.isStrongPassword(password)) { throw Error ('Password weak')}
     // email exists
     console.log("trying singup")
     try {
@@ -77,9 +77,9 @@ userSchema.statics.signup = async function(email, password, userName) {
     } catch (error) {
         throw Error('failure to access database')
     }
-    //if (alreadyExists) {
-    //   throw Error('Email already exists')
-   // }
+    if (alreadyExists) {
+       throw Error('Email already exists')
+    }
     // hashing password
     const uniquify = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, uniquify)
