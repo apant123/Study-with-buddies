@@ -3,6 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useSignup } from "../hooks/useSignup"
 import { useNavigate } from 'react-router-dom';
+import courseOptions from './courseOptions';
 
 import {
   Container,
