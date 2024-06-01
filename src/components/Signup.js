@@ -1,5 +1,5 @@
 import React from 'react';
-import Select from 'react-select';
+// import Select from 'react-select';
 import { useState } from 'react';
 import { useSignup } from "../hooks/useSignup"
 //import sportsOptions from './sportsOptions';
@@ -27,7 +27,7 @@ function Signup() {
   const [userName, setUser] = useState('');
   const [fullName, setName] = useState('');
   const [age, setAge] = useState('');
-  const [sports, setSports] = useState('');
+  //const [sports, setSports] = useState('');
   const { signup, error, isLoading } = useSignup();
 
   const handleSubmit = async (e) => {
@@ -76,7 +76,7 @@ function Signup() {
     // }  
 
     // If no validation errors, proceed with signup
-    await signup(email, password, userName, fullName, age, sports);
+    await signup(email, password, userName, fullName, age);
   };
 
 
