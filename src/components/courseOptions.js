@@ -11,6 +11,6 @@ const course = [
 { value: 'math61', label: 'Math 61'}
 ]
 
-const courseOptions = sport.sort((a, b) => a.label.localeCompare(b.label));
+const courseOptions = course.sort((a, b) => a.label.localeCompare(b.label));
 
 export default courseOptions;

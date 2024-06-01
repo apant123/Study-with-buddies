@@ -36,46 +36,46 @@ function Signup() {
     e.preventDefault();
 
     // Validation checks
-    // const validationErrors = [];
+    const validationErrors = [];
 
-    // if (!fullName.includes(' ')) {
-    //   validationErrors.push('Full Name must include first name and last name separated by a space.');
-    // }
+    if (!fullName.includes(' ')) {
+     validationErrors.push('Full Name must include first name and last name separated by a space.');
+    }
     
-    // if (userName.length < 5) {
-    //   validationErrors.push('Username must be at least 5 characters.');
-    // }
+    if (userName.length < 5) {
+      validationErrors.push('Username must be at least 5 characters.');
+    }
 
-    // if (parseInt(age, 10) < 18 || isNaN(parseInt(age, 10))) {
-    //   validationErrors.push('Age must be at least 18 and a valid number.');
-    // }
+    if (parseInt(age, 10) < 18 || isNaN(parseInt(age, 10))) {
+      validationErrors.push('Age must be at least 18 and a valid number.');
+    }
 
-    // // Password validation
-    // if (password.length < 8) {
-    //   validationErrors.push('Password must be at least 8 characters.');
-    // }
+    // Password validation
+    if (password.length < 8) {
+      validationErrors.push('Password must be at least 8 characters.');
+    }
 
-    // if (!/[A-Z]/.test(password)) {
-    //   validationErrors.push('Password must contain at least one uppercase letter.');
-    // }
+     if (!/[A-Z]/.test(password)) {
+       validationErrors.push('Password must contain at least one uppercase letter.');
+     }
 
-    // if (!/[a-z]/.test(password)) {
-    //   validationErrors.push('Password must contain at least one lowercase letter.');
-    // }
+     if (!/[a-z]/.test(password)) {
+       validationErrors.push('Password must contain at least one lowercase letter.');
+     }
 
-    // if (!/\d/.test(password)) {
-    //   validationErrors.push('Password must contain at least one digit.');
-    // }
+     if (!/\d/.test(password)) {
+       validationErrors.push('Password must contain at least one digit.');
+     }
 
-    // if(sports.length < 5) {
-    //   validationErrors.push('Must choose at least 5 sports')
-    // }
+     if(sports.length < 5) {
+       validationErrors.push('Must choose at least 5 sports')
+     }
 
-    // if (validationErrors.length > 0) {
-    //   // Display all validation errors
-    //   alert(validationErrors.join('\n'));
-    //   return;
-    // }  
+     if (validationErrors.length > 0) {
+       // Display all validation errors
+       alert(validationErrors.join('\n'));
+       return;
+     }  
 
     // If no validation errors, proceed with signup
     navigate('/profile');
@@ -187,7 +187,7 @@ function Signup() {
                     {console.log('Options:', courseOptions)} {/* Add this line */}
                     <Select
                       id="courses"
-                      options={coursesOptions}
+                      options={courseOptions}
                       isMulti
                       onChange={(selectedOptions) =>
                         setCourses(selectedOptions.map((option) => option.value))
