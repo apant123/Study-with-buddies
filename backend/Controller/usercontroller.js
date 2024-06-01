@@ -24,7 +24,7 @@ const loginUser = async (req, res) => {
 }
 
 const signupUser = async (req, res) => {
-    const { email, password, userName } = req.body;
+    const { email, password, userName, fullName, age, courses } = req.body;
 
     console.log("signupUser called");
     // Validate input data
@@ -35,7 +35,7 @@ const signupUser = async (req, res) => {
 
    // try {
         // Call signup method, assuming it handles validation and hashing
-        const user = await User.signup(email, password, userName);
+        const user = await User.signup(email, password, userName, fullName, age, courses );
 
         // Assuming createToken generates a JWT
         console.log("creating token");
