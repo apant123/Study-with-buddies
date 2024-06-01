@@ -27,7 +27,6 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [userName, setUser] = useState('');
   const [fullName, setName] = useState('');
-  const [age, setAge] = useState('');
   const [courses, setCourses] = useState('');
   const { signup, error, isLoading } = useSignup();
 
@@ -45,10 +44,6 @@ function Signup() {
     
     if (userName.length < 5) {
       validationErrors.push('Username must be at least 5 characters.');
-    }
-
-    if (parseInt(age, 10) < 18 || isNaN(parseInt(age, 10))) {
-      validationErrors.push('Age must be at least 18 and a valid number.');
     }
 
     // Password validation
@@ -80,7 +75,7 @@ function Signup() {
 
     // If no validation errors, proceed with signup
     navigate('/profile');
-    await signup(email, password, userName, fullName, age);
+    await signup(email, password, userName, fullName);
     
   };
 
