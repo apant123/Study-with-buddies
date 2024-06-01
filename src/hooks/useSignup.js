@@ -7,6 +7,11 @@ import { useAuthContext } from "./useAuthContext"
     const { dispatch } = useAuthContext()
 
     const signup = async (email, password, userName, fullName, age, courses) => {
+
+        if(!email || !password || !userName || !fullName || !age || !courses){
+            console.log('fields not fully filled out')
+        }
+
         setIsLoading(true)
         setError(null)
         console.log(JSON.stringify({email, password, userName, fullName, age, courses}))
