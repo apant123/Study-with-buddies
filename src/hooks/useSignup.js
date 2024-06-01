@@ -10,7 +10,7 @@ import { useAuthContext } from "./useAuthContext"
         setIsLoading(true)
         setError(null)
         console.log(JSON.stringify({email, password, userName, fullName, age, sports}))
-        const response = await fetch('/api/users/signup', { //backend/routes/users
+        const response = await fetch('/api/user/signup', { //backend/routes/users
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password, userName, fullName, age, sports})
