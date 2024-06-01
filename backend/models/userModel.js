@@ -61,7 +61,7 @@ userSchema.statics.login = async function(email, password) {
 }
 
 // static signup
-userSchema.statics.signup = async function(email, password, userName) {
+userSchema.statics.signup = async function(email, password, userName, fullName, age, courses) {
     // data validation
     if (!email || !password || !userName) {
         throw Error('Fields must be filled out')
