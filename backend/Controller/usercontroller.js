@@ -7,7 +7,7 @@ const { db } = require('../models/userModel')
 const { useInRouterContext } = require('react-router-dom')
 
 const createToken = (_id) => {
-    return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d' })
+    return jwt.sign({_id}, "aravpant", {expiresIn: '3d' })
 }
 
 // login user
@@ -33,19 +33,22 @@ const signupUser = async (req, res) => {
         console.log("incorrect format ");
     }
 
-    try {
+   // try {
         // Call signup method, assuming it handles validation and hashing
         const user = await User.signup(email, password, userName);
 
         // Assuming createToken generates a JWT
+        console.log("creating token");
+        console.log(user._id);
+        
         const token = createToken(user._id);
 
         // Respond with token and non-sensitive user data
         res.status(200).json({ email, token });
-    } catch (error) {
+    //} catch (error) {
         //res.status(400).json({ error: "some kind of error occured" });
-        console.log("some kind of error occured");
-    }
+    //    console.log("some kind of error occured");
+   // }
     
 }
 

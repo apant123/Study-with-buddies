@@ -1,4 +1,3 @@
-
 const express = require('express');
 const Event = require('../models/groupModel')
 
@@ -14,8 +13,6 @@ const {
    updateGroup
 } = require('../Controller/groupcontroller')
 
-
-
 route.get('/', getAllGroups)
 
 route.get('/:id', getGroup)
@@ -27,5 +24,3 @@ route.delete('/:id', deleteGroup)
 route.patch('/:id', updateGroup)
   
 module.exports = route
-
-
