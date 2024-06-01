@@ -157,7 +157,7 @@ function Signup() {
                     />
                   </FormControl>
                   <FormControl>
-                    <FormLabel>Instagram</FormLabel>
+                    <FormLabel>Username</FormLabel>
                     <Input
                       id="userName"
                       type="text"
