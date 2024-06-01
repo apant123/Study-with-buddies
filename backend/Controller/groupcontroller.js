@@ -1,5 +1,5 @@
-const Group = require('../models/groupModel')
 const mongoose = require('mongoose')
+const Group = require('../models/groupModel')
 const { addGroup } = require('./usercontroller')
 
 // get all groups
