@@ -181,6 +181,18 @@ function Signup() {
                       value={password}
                     />
                   </FormControl>
+                  <FormControl>
+                    <FormLabel htmlFor="courses">Courses</FormLabel>
+                    {console.log('Options:', courseOptions)} {/* Add this line */}
+                    <Select
+                      id="courses"
+                      options={coursesOptions}
+                      isMulti
+                      onChange={(selectedOptions) =>
+                        setCourses(selectedOptions.map((option) => option.value))
+                      }
+                    ></Select>
+                  </FormControl>
                   
                 </Stack>
                 <Divider />
