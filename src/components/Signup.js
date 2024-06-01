@@ -181,15 +181,6 @@ function Signup() {
                       value={password}
                     />
                   </FormControl>
-                  <FormControl>
-                    <FormLabel htmlFor="Age">Age</FormLabel>
-                    <Input
-                      id="age"
-                      type="number"
-                      onChange={(e) => setAge(e.target.value)}
-                      value={age}
-                    />
-                  </FormControl>
                   
                 </Stack>
                 <Divider />
