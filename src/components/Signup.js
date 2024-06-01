@@ -2,7 +2,7 @@ import React from 'react';
 // import Select from 'react-select';
 import { useState } from 'react';
 import { useSignup } from "../hooks/useSignup"
-//import sportsOptions from './sportsOptions';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Container,
@@ -27,8 +27,9 @@ function Signup() {
   const [userName, setUser] = useState('');
   const [fullName, setName] = useState('');
   const [age, setAge] = useState('');
-  //const [sports, setSports] = useState('');
   const { signup, error, isLoading } = useSignup();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -76,7 +77,9 @@ function Signup() {
     // }  
 
     // If no validation errors, proceed with signup
+    navigate('/profile');
     await signup(email, password, userName, fullName, age);
+    
   };
 
 
