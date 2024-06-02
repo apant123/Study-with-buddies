@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 import { ChakraProvider } from '@chakra-ui/react';
 
-const CreateEvent = () => {
+const CreateGroup = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [title, setTitle] = useState(''); // Group Name
   const [course, setCourse] = useState(''); // Course that group belongs to
@@ -92,13 +92,13 @@ const CreateEvent = () => {
     setCurrentQuestion(currentQuestion + 1);
   };
 
-  const handleCreateEvent = async (e) => {
+  const handleCreateGroup = async (e) => {
     setError(null);
     e.preventDefault();
     // Perform action to create the event using the provided data
     console.log({ title, course, description, meetingDay });
 
-    const newEvent = {
+    const newGroup = {
       title,
       course,
       description,
@@ -118,7 +118,7 @@ const CreateEvent = () => {
     const json = await response.json();
     console.log(json._id)
     
-    const eventId = json._id;
+    const groupId = json._id;
     const jsonId = {myGroups: groupId}
     console.log(JSON.stringify(jsonId))
 
@@ -151,7 +151,7 @@ const CreateEvent = () => {
     setIsSubmitted(true);
   };
 
-  const handleCreateAnotherEvent = () => {
+  const handleCreateAnotherGroup = () => {
     // Reset state variables to start a new event creation
     setTitle('');
     setCourse('');
@@ -191,7 +191,7 @@ const CreateEvent = () => {
               color: 'white',
               margin: '10px',
             }}
-            onClick={handleCreateAnotherEvent}
+            onClick={handleCreateAnotherGroup}
           >
             Create Another Group
           </Button>
@@ -211,7 +211,7 @@ const CreateEvent = () => {
           if (currentQuestion < 6) {
             handleNextQuestion();
           } else if (currentQuestion === 6 && isValidAnswerToQuestion6()) {
-            handleCreateEvent(e);
+            handleCreateGroup(e);
           }
         }}
       >
@@ -391,7 +391,7 @@ const CreateEvent = () => {
   );
 };
 
-export default CreateEvent;
+export default CreateGroup;
 // import React, { useState, useEffect } from 'react';
 // import { Button } from '@mui/material';
 // import { useNavigate } from 'react-router-dom';
