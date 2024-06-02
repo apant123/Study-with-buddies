@@ -61,14 +61,13 @@ function Profile() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('sunnyvinay7@gmail.com');
   const [password, setPassword] = useState('pass123');
-  const [age, setAge] = useState('19');
   
   return (
     <>
         {loggedIn ? 
           <>
           <h1 style={{fontSize:"50px"}}><b>Your Profile</b></h1>
-          <EditProfile name={fullName} email={email} pass={password} age={age} /> 
+          <EditProfile name={fullName} email={email} pass={password} /> 
           </>
           
         : 
