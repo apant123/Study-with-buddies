@@ -63,19 +63,21 @@ userSchema.statics.login = async function(email, password) {
 // static signup
 userSchema.statics.signup = async function(email, password, userName, fullName, courses) {
     // data validation
+    
     if (!email || !password || !userName || !fullName || !courses) {
-        throw Error('Fields must be filled out')
+        console.log('Fields must be filled out')
     }
     
     if (!validator.isEmail(email)) {
-        throw Error('Invalid email')
+        console.log('Invalid email')
     }
     if (!validator.isStrongPassword(password)) { throw Error ('Password weak')}
     
     // email exists
+    
     const alreadyExists = await this.findOne({ email })
     if (alreadyExists) {
-        throw Error('Email already exists')
+        console.log('Email already exists')
     }
     // hashing password
     const uniquify = await bcrypt.genSalt(10)
