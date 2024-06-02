@@ -73,15 +73,9 @@ userSchema.statics.signup = async function(email, password, userName, fullName, 
     if (!validator.isStrongPassword(password)) { throw Error ('Password weak')}
     
     // email exists
-    console.log("trying signup")
-    try {
-        // Check if the user with the given email already exists
-        const alreadyExists = await User.findOne({ email });
-    
-        if (alreadyExists) {
-          throw new Error('Email already exists');
-    }
-    
+    const alreadyExists = await this.findOne({ email })
+    if (alreadyExists) {
+        throw Error('Email already exists')
     }
     // hashing password
     const uniquify = await bcrypt.genSalt(10)
