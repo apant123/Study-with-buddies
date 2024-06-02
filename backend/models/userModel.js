@@ -71,7 +71,7 @@ userSchema.statics.signup = async function(email, password, userName, fullName, 
     if (!validator.isEmail(email)) {
         console.log('Invalid email')
     }
-    if (!validator.isStrongPassword(password)) { throw Error ('Password weak')}
+    // if (!validator.isStrongPassword(password)) { throw Error ('Password weak')}
     
     // email exists
     
