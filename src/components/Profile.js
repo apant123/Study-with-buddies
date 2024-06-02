@@ -66,12 +66,32 @@ function Profile() {
       validationErrors.push('Username must be at least 5 characters.');
     }
 
+    // Password validation
+    if (password.length < 8) {
+       validationErrors.push('Password must be at least 8 characters.');
+     }
+
+      if (!/[A-Z]/.test(password)) {
+        validationErrors.push('Password must contain at least one uppercase letter.');
+      }
+
+      if (!/[a-z]/.test(password)) {
+        validationErrors.push('Password must contain at least one lowercase letter.');
+      }
+
+      if (!/\d/.test(password)) {
+        validationErrors.push('Password must contain at least one digit.');
+      }
+
     if (validationErrors.length > 0) {
       alert(validationErrors.join('\n'));
       return;
     }
 
+
+
     try {
+      console.log('is this working')
       const response = await fetch(`/api/user/updateProfile/${userId}`, {
         method: 'PATCH',
         body: JSON.stringify({ fullName, courses, email, username }),
