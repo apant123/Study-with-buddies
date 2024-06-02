@@ -35,7 +35,7 @@ function Profile() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [courses, setCourses] = useState('3');
+  const [courses, setCourses] = useState([]);
   const [transformedCourses, setTCourses] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
