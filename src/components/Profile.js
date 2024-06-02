@@ -161,7 +161,20 @@ function Profile() {
                     } 
                 </div>
                 <div>
-                  <Typography sx={{fontSize:"25px",fontWeight:"bold"}}>Courses</Typography>
+                  <Typography sx={{marginBottom:"10px",fontSize:"25px",fontWeight:"bold"}}>Courses</Typography>
+                  {editMode ?
+                  <Select
+                    id="courses"
+                    value={transformedCourses}
+                    options={courseOptions}
+                    isMulti
+                    onChange={(selectedOptions) => {
+                      setCourses((e) => selectedOptions.map((option) => option.value));
+                      setTCourses(selectedOptions);
+                    }}/>
+                    :
+                    courses.map((course) => <Typography>{course}</Typography>)
+                  }
                 </div>
               </Stack>
             </Box> 
