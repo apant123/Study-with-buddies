@@ -44,17 +44,17 @@ const userSchema = new Schema({
 
 userSchema.statics.login = async function(email, password) {
     if (!email || !password) {
-        throw Error('Email and password must be filled out')
+        console.log('Email and password must be filled out')
     }
 
     const user = await this.findOne({ email })
     if (!user) {
-        throw Error('Email doesn\'t exist in database')
+        console.log('Email doesn\'t exist in database')
     }
 
     const match = await bcrypt.compare(password, user.password)
     if (!match) {
-        throw Error('Incorrect password')
+        console.log('Incorrect password')
     }
 
     return user

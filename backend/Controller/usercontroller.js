@@ -12,7 +12,13 @@ const createToken = (_id) => {
 
 // login user
 const loginUser = async (req, res) => {
+    console.log('calling loginUser')
     const { email, password } = req.body
+
+    if(!email || !password){
+        console.log("email and passowrd are not filled out")
+    }
+
     try {
         const user = await User.login(email, password)
 
