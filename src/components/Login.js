@@ -126,7 +126,7 @@ function Login() {
                   >
                     Sign in
                   </Button>
-                  {error && <div className="error" style={{ color: 'red'}}>**Incorrect Email and Password**</div>}
+                  {error && <div className="error" style={{ color: 'red'}}>**Incorrect Email or Password**</div>}
                 </Stack>
               </Stack>
             </Box>
