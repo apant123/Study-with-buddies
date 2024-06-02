@@ -25,16 +25,21 @@ const getGroup = async (req, res) => {
 }
 // create a new group
 const createGroup = async (req, res) => {
-    const {title, courses, courseTotal, description, groupDate, location, groupTime} = req.body
+    const {groupname, course, description, meetingDay, location, meetingTime} = req.body
 
-    if(!title || !courses || !courseTotal || !description || !groupDate || !location || !groupTime){
+
+    
+    if(!groupname || !course || !description || !meetingDay || !location || !meetingTime){
         console.log("Group contents not filled out")
     }
 
     try {
-        const group = await Group.create({title, courses, courseTotal, description, groupDate, location, groupTime});
+        const group = await Group.create({ groupname, course, description, meetingDay, location, meetingTime});
         res.status(200).json(group);
     } catch (error) {
+        
+        console.log("Error adding group");
+        
         res.status(400).json({ error: error.message });
     }
 }

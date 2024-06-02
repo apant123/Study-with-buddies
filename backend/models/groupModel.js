@@ -3,27 +3,19 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const groupSchema = new Schema({
-    title: {
+    groupname: {
         type: String,
         required: true
     },
-    courses: {
+    course: {
         type: String,
         required: true
-    },
-    courseTotal: {
-        type: Number,
-        required: true
-    },
-    groupOpen: {
-        type: Number,
-        required: false
     },
     location: {
         type: String,
         required: true
     },
-    groupTime: {
+    meetingDay: {
         type: String,
         required: true
     },
@@ -35,7 +27,7 @@ const groupSchema = new Schema({
         type: String,
         required: true
     },
-    groupDate: {
+    meetingTime: {
         type: String,
         required: true
     }
