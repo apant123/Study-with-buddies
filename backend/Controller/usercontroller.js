@@ -7,7 +7,7 @@ const { db } = require('../models/userModel')
 const { useInRouterContext } = require('react-router-dom')
 
 const createToken = (_id) => {
-    return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d' })
+    return jwt.sign({_id}, "aravpant", {expiresIn: '3d' })
 }
 
 // login user
@@ -24,20 +24,23 @@ const loginUser = async (req, res) => {
 }
 
 const signupUser = async (req, res) => {
-    const { email, password, userName } = req.body;
+    const { email, password, userName, fullName, age, courses } = req.body;
 
     console.log("signupUser called");
     // Validate input data
-    if (!email || !password || !userName) {
+    if (!email || !password || !userName || !fullName || !age || !courses) {
         //return res.status(400).json({ error: "Please provide email, password, and username." });
         console.log("incorrect format ");
     }
 
     try {
         // Call signup method, assuming it handles validation and hashing
-        const user = await User.signup(email, password, userName);
+        const user = await User.signup(email, password, userName, fullName, age, courses );
 
         // Assuming createToken generates a JWT
+        console.log("creating token");
+        console.log(user._id);
+        
         const token = createToken(user._id);
 
         // Respond with token and non-sensitive user data

@@ -61,29 +61,33 @@ userSchema.statics.login = async function(email, password) {
 }
 
 // static signup
-userSchema.statics.signup = async function(email, password, userName, fullName, courses, groupsCreated) {
+userSchema.statics.signup = async function(email, password, userName, fullName, age, courses) {
     // data validation
-    if (!email || !password || !userName || !fullName || !courses) {
+    if (!email || !password || !userName || !fullName || !age || !courses) {
         throw Error('Fields must be filled out')
     }
     if (!validator.isEmail(email)) {
         throw Error('Invalid email')
     }
-    //if (!validator.isStrongPassword(password)) { throw Error ('Password weak')}
+    if (!validator.isStrongPassword(password)) { throw Error ('Password weak')}
     // email exists
-    const alreadyExists = await this.findOne({ email })
+    console.log("trying singup")
+    try {
+        const alreadyExists = await this.findOne({ email })
+    } catch (error) {
+        throw Error('failure to access database')
+    }
     if (alreadyExists) {
-        throw Error('Email already exists')
+       throw Error('Email already exists')
     }
     // hashing password
     const uniquify = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, uniquify)
     
-    const userData = await this.create({ email, password: hash, userName, fullName, courses, groupsCreated})
+    const userData = await this.create({ email, password: hash, userName})
     
     return userData
 }
-
 
 userSchema.statics.findMatches = async function(userCourses) {
     const users = await this.find({
