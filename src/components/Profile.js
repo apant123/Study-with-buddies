@@ -30,89 +30,11 @@ function Profile() {
   const [editMode, setEditMode] = useState(false);
   const [showPass, setShowPass] = useState(false);
 
-  const [fullName, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [courses, setCourses] = useState('');
-  const [transformedCourses, setTCourses] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
-
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const response = await fetch(`/api/user/getUserById/${userId}`);
-      const json = await response.json();
-
-      console.log(json.sports);
-
-
-
-
-      if (response.ok) {
-        setTCourses(json.courses.map((course) => ({ value: course, label: course })));
-        console.log(transformedCourses);
-        setCourses(json.courses);
-        setName(json.fullName);
-        setEmail(json.email);
-        setUsername(json.userName);
-      }
-    };
-
-    if (user) {
-      fetchProfile();
-    }
-  }, [user]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Validation checks
-    const validationErrors = [];
-
-    if (!fullName.includes(' ')) {
-      validationErrors.push('Full Name must include first name and last name separated by a space.');
-    }
-
-    if (courses.length < 3) {
-      validationErrors.push('Please choose at least three courses.');
-    }
-
-    if (username.length < 5) {
-      validationErrors.push('Username must be at least 5 characters.');
-    }
-
-    if (validationErrors.length > 0) {
-      alert(validationErrors.join('\n'));
-      return;
-    }
-
-    try {
-      const response = await fetch(`/api/user/updateProfile/${userId}`, {
-        method: 'PATCH',
-        body: JSON.stringify({ fullName, courses, email, username }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      } else {  
-        const updatedUser = await response.json();
-        console.log('User updated:', updatedUser);
-        setIsModalOpen(true);
-
-
-      }
-    } catch (error) {
-      console.error('Failed to update user');
-    }
-  };
+  const [fullName, setName] = useState('Sunny Vinay');
+  const [username, setUsername] = useState('sunnygotskillz');
+  const [email, setEmail] = useState('sunnyvinay7@gmail.com');
+  const [password, setPassword] = useState('pass123');
+  const [courses, setCourses] = useState([]);
   
   return (
     <>

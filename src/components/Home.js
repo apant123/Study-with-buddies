@@ -3,11 +3,18 @@ import { Stack, Button } from '@mui/material';
 import { MdGroupAdd } from "react-icons/md";
 import { FaPeopleGroup, FaHeartCirclePlus } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 export default function Home() {
   const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(); // is user logged in?
+  const { user } = useAuthContext();
 
-  const [loggedIn, setLoggedIn] = useState(false); // is user logged in?
+  useEffect(() => {
+    if (user) {
+      setLoggedIn(true);
+    }
+  }, [user]);
 
   return (
     <>
@@ -33,7 +40,9 @@ export default function Home() {
       </div>
 
       <div style={{ marginTop: 40, textAlign: 'center' }}>
-        {loggedIn ? null : 
+        {loggedIn ?
+          <Typography>You are currently logged in. Select an option above.</Typography> 
+        : 
           <Button variant="contained" color="primary" size="large" onClick={() => navigate('/login')}>
             Click here to login
           </Button>
