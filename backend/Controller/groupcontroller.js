@@ -71,33 +71,10 @@ const updateGroup = async (req, res) => {
     res.status(200).json(group)
 }
 
-const decCourse = async (req, res) => {
-    const groupId = req.params.id
-    console.log(groupId)
-    try {
-        const group = await Group.findById(groupId);
-
-        if (!group) {
-            return res.status(404).json({ error: 'No such group' });
-        }
-        console.log(group)
-        // Decrement courseTotal by 1
-        group.courseTotal -= 1;
-
-        // Save the updated group
-        const updatedGroup = await group.save();
-
-        res.json(updatedGroup);
-    } catch (error) {
-        console.error('Error decrementing course:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-}
 module.exports = {
     getAllGroups,
     getGroup,
     createGroup,
     deleteGroup,
     updateGroup,
-    decCourse
 }
