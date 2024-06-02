@@ -24,7 +24,7 @@ const loginUser = async (req, res) => {
 }
 
 const signupUser = async (req, res) => {
-    const { email, password, userName, fullName, age, courses } = req.body;
+    const { email, password, userName, fullName, courses } = req.body;
 
     console.log("signupUser called");
     // Validate input data
@@ -161,7 +161,7 @@ const removeGroup = async (req, res) => {
 // add an event to a user's myEvents
 const updateProfile = async (req, res) => {
     const userId = req.params.id
-    const updates = req.body; // Assuming you send the event ID in the request body
+    const updates = req.body;
 
     if (mongoose.Types.ObjectId.isValid(userId)){// && mongoose.Types.ObjectId.isValid(eventId)) {
         db.collection('users')
