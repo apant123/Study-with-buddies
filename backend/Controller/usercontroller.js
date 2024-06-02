@@ -24,18 +24,18 @@ const loginUser = async (req, res) => {
 }
 
 const signupUser = async (req, res) => {
-    const { email, password, userName } = req.body;
+    const { email, password, userName, fullName, age, courses } = req.body;
 
     console.log("signupUser called");
     // Validate input data
-    if (!email || !password || !userName) {
+    if (!email || !password || !userName || !fullName || !age || !courses) {
         //return res.status(400).json({ error: "Please provide email, password, and username." });
         console.log("incorrect format ");
     }
 
-   // try {
+    try {
         // Call signup method, assuming it handles validation and hashing
-        const user = await User.signup(email, password, userName);
+        const user = await User.signup(email, password, userName, fullName, age, courses );
 
         // Assuming createToken generates a JWT
         console.log("creating token");
@@ -45,10 +45,10 @@ const signupUser = async (req, res) => {
 
         // Respond with token and non-sensitive user data
         res.status(200).json({ email, token });
-    //} catch (error) {
+    } catch (error) {
         //res.status(400).json({ error: "some kind of error occured" });
-    //    console.log("some kind of error occured");
-   // }
+        console.log("some kind of error occured");
+    }
     
 }
 
