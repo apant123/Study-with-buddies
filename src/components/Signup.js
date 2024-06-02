@@ -74,7 +74,7 @@ function Signup() {
     //  }  
 
     // If no validation errors, proceed with signup
-    navigate('/profile');
+    //navigate('/profile');
     await signup(email, password, userName, fullName, courses);
     
   };
