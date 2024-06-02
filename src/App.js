@@ -1,5 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import React from 'react';
+import {useLogout} from './hooks/useLogout'
 import Nav from './components/Nav.js';
 import Home from './components/Home.js';
 import Profile from './components/Profile.js';
@@ -12,7 +13,20 @@ import { AuthContextProvider } from './context/AuthContext';
 import { useAuthContext } from "./hooks/useAuthContext";
 
 function App() {
+  const {logout} = useLogout()
   const {user} = useAuthContext();
+
+  const handleLogout = () => {
+    logout()
+  }
+
+  const handleProfile = () => {
+    window.location.href="http://localhost:3000/profile";
+  }
+
+    useEffect(() => {
+    setShouldRedirect(true);
+  }, []);
 
   return (
       <div className="App">
