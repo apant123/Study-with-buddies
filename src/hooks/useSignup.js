@@ -6,19 +6,19 @@ import { useAuthContext } from "./useAuthContext"
     const [isLoading, setIsLoading] = useState(null)
     const { dispatch } = useAuthContext()
 
-    const signup = async (email, password, userName, fullName, age, courses) => {
+    const signup = async (email, password, userName, fullName, courses) => {
 
-        if(!email || !password || !userName || !fullName || !age || !courses){
+        if(!email || !password || !userName || !fullName || !courses){
             console.log('fields not fully filled out')
         }
 
         setIsLoading(true)
         setError(null)
-        console.log(JSON.stringify({email, password, userName, fullName, age, courses}))
+        console.log(JSON.stringify({email, password, userName, fullName, courses}))
         const response = await fetch('/api/user/signup', { //backend/routes/users
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email, password, userName, fullName, age, courses})
+            body: JSON.stringify({email, password, userName, fullName, courses})
         })
         const json = await response.json()
 
