@@ -187,12 +187,12 @@ function Profile() {
 
           {editMode ?
               <Button variant="contained" color="primary" size="large" startIcon={<MdSaveAs />} 
-                // onClick={() => {
-                //   setEditMode(false);
+                onClick={() => {
+                  setEditMode(false);
                   
-                // }}
-                // onClick = {handleSubmit}
-                onClick={handleCombinedClick}>
+                }}>
+                // // onClick = {handleSubmit}
+                // // onClick={handleCombinedClick}
 
                 Save Changes
               </Button>
