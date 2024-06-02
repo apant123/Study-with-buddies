@@ -44,17 +44,17 @@ const userSchema = new Schema({
 
 userSchema.statics.login = async function(email, password) {
     if (!email || !password) {
-        console.log('Email and password must be filled out')
+        throw Error('Email and password must be filled out')
     }
 
     const user = await this.findOne({ email })
     if (!user) {
-        console.log('Email doesn\'t exist in database')
+        throw Error('Email doesn\'t exist in database')
     }
 
     const match = await bcrypt.compare(password, user.password)
     if (!match) {
-        console.log('Incorrect password')
+        throw Error('Incorrect password')
     }
 
     return user
@@ -75,15 +75,14 @@ userSchema.statics.signup = async function(email, password, userName, fullName, 
     // email exists
     console.log("trying signup")
     try {
-        const alreadyExists = await this.findOne({ email })
-        if(alreadyExists){
-            throw Error('Email already exists')
-        }
-    } catch (error) {
-        throw Error('failure to access database')
+        // Check if the user with the given email already exists
+        const alreadyExists = await User.findOne({ email });
+    
+        if (alreadyExists) {
+          throw new Error('Email already exists');
     }
     
-
+    }
     // hashing password
     const uniquify = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, uniquify)
