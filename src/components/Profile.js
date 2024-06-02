@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Stack } from '@mui/material';
+import { Box, Typography, Stack, Button, TextField } from '@mui/material';
 import { useNavigate, Navigate } from 'react-router-dom';
 import './styles.css';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { CiEdit } from "react-icons/ci";
+import { MdSaveAs } from "react-icons/md";
 
 function hidePass(pass) {
   var str = '';
@@ -12,64 +14,80 @@ function hidePass(pass) {
   return str;
 }
 
-function EditProfile(props) {
-  const [showPass, setShowPass] = useState(false);
-  return (
-    <div style={{justifyContent:"center", display:"flex"}} >
-      <Box width="300px"  alignItems="center" p={2} sx={{border: '5px solid #6ed0d4' }} >
-        <Stack spacing="30px">
-          <div>
-            <Typography sx={{fontSize:"25px",fontWeight:"bold"}}>Your Name</Typography>
-            <Typography>{props.name}</Typography>
-          </div>
-          <div>
-            <Typography sx={{fontSize:"25px",fontWeight:"bold"}}>Your Email</Typography>
-            <Typography>{props.email}</Typography>
-          </div>
-          <div>
-            <Typography sx={{fontSize:"25px",fontWeight:"bold"}}>Your Password</Typography>
-            
-              {showPass ?
-                <div style={{diplay:'flex', justifyContent:"space-between"}}>
-                  <Typography style={{display: 'inline-block', paddingRight:'10px'}}>{props.pass}</Typography>
-                  <FaEyeSlash size={20} onClick={() => {setShowPass(!showPass)}} style={{display: 'inline-block', paddingTop:"3px"}} />
-                </div>
-                :
-                <div style={{diplay:'flex', justifyContent:"space-between"}}>
-                  <Typography style={{display: 'inline-block', paddingRight:'10px'}}>{hidePass(props.pass)}</Typography>
-                  <FaEye style={{display: 'inline-block'}} onClick={() => {setShowPass(!showPass)}}/>
-                </div>
-                
-              }
-          </div>
-          <div>
-            <Typography sx={{fontSize:"25px",fontWeight:"bold"}}>Your Age</Typography>
-            <Typography>{props.age}</Typography>
-          </div>
-          
-        </Stack>
-      </Box>
-    </div>
-  );
-}
-
 function Profile() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(true); // is user logged in?
+  const [editMode, setEditMode] = useState(false);
+  const [showPass, setShowPass] = useState(false);
 
   const [fullName, setName] = useState('Sunny Vinay');
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('sunnygotskillz');
   const [email, setEmail] = useState('sunnyvinay7@gmail.com');
   const [password, setPassword] = useState('pass123');
+  const [courses, setCourses] = useState('19');
   
   return (
     <>
         {loggedIn ? 
-          <>
+        <div>
           <h1 style={{fontSize:"50px"}}><b>Your Profile</b></h1>
-          <EditProfile name={fullName} email={email} pass={password} /> 
-          </>
-          
+
+          <div style={{justifyContent:"center", display:"flex", paddingBottom:"15px"}}>
+            <Box width="600px" alignItems="center" p={2} sx={{border: '5px solid #6ed0d4' }} >
+              <Stack spacing="30px">
+                <div>
+                  <Typography sx={{fontSize:"25px",fontWeight:"bold"}}>Full Name</Typography>
+                  {editMode ? <TextField sx={{width:"40ch"}} defaultValue={fullName} onChange={(e) => setName(e.target.value)}/> : <Typography>{fullName}</Typography> }
+                </div>
+                <div>
+                  <Typography sx={{fontSize:"25px",fontWeight:"bold"}}>Username</Typography>
+                  {editMode ? <TextField sx={{width:"40ch"}} defaultValue={username} onChange={(e) => setUsername(e.target.value)}/> : <Typography>{username}</Typography> }
+                </div>
+                <div>
+                  <Typography sx={{fontSize:"25px",fontWeight:"bold"}}>Email</Typography>
+                  {editMode ? <TextField sx={{width:"40ch"}} defaultValue={email} onChange={(e) => setEmail(e.target.value)}/> : <Typography>{email}</Typography> }
+                </div>
+                <div>
+                  <Typography sx={{fontSize:"25px",fontWeight:"bold"}}>Password</Typography>
+                    {editMode ?
+                      <TextField sx={{width:"40ch"}} defaultValue={password} onChange={(e) => setPassword(e.target.value)}/>
+                    :
+                    <div>
+                      {showPass ? 
+                        <div style={{diplay:'flex', justifyContent:"space-between"}}>
+                          <Typography style={{display: 'inline-block', paddingRight:'10px'}}>{password}</Typography>  
+                          <FaEyeSlash size={20} onClick={() => {setShowPass(!showPass)}} style={{display: 'inline-block', paddingTop:"3px"}} />
+                        </div>
+                      :
+                        <div>
+                          <Typography style={{display: 'inline-block', paddingRight:'10px'}}>{hidePass(password)}</Typography>
+                          <FaEye style={{display: 'inline-block'}} onClick={() => {setShowPass(!showPass)}}/>
+                        </div>
+                      }         
+                    </div>
+                    } 
+                </div>
+                <div>
+                  <Typography sx={{fontSize:"25px",fontWeight:"bold"}}>Courses</Typography>
+                </div>
+              </Stack>
+            </Box> 
+          </div>
+
+          {editMode ?
+              <Button variant="contained" color="primary" size="large" startIcon={<MdSaveAs />} 
+                onClick={() => {
+                  setEditMode(false);
+                }}>
+
+                Save Changes
+              </Button>
+            :
+            <Button variant="contained" color="primary" size="large" startIcon={<CiEdit />} onClick={() => setEditMode(true)}>
+                Edit
+              </Button>
+          }
+        </div>
         : 
           <Navigate to="/login" />
         }
