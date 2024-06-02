@@ -242,13 +242,13 @@ const CreateEvent = () => {
         return (
           <FormControl>
             <FormLabel htmlFor="sport">Choose a Course</FormLabel>
-            {console.log('Options:', sportsOptions)}
+            {console.log('Options:', courseOptions)}
             <Select
-              id="sports"
-              options={sportsOptions}
+              id="courses"
+              options={courseOptions}
               isMulti
               onChange={(selectedOptions) =>
-                setSport(
+                setCourse(
                   arrayToString(
                     selectedOptions.map((option) => option.label)
                   )
