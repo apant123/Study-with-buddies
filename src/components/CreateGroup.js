@@ -20,10 +20,9 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 const CreateGroup = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [title, setTitle] = useState(''); // Group Name
+  const [groupname, setGroupName] = useState(''); // Group Name
   const [course, setCourse] = useState(''); // Course that group belongs to
   const [meetingDay, setMeetingDay] = useState(null); // Day group meets
-  // const [spotsTotal, setPeopleNeeded] = useState('');
   const [description, setDescription] = useState(''); // Group Description
   const [isSubmitted, setIsSubmitted] = useState(false); 
   const [error, setError] = useState(null);
@@ -47,14 +46,14 @@ const CreateGroup = () => {
     // Check for errors based on the current question
     switch (currentQuestion) {
       case 0:
-        if (title.length <= 4) {
-          setError('Title must be at least 5 characters.');
+        if (groupname.length <= 4) {
+          setError('Group name must be at least 5 characters.');
           return;
         }
         break;
       case 1:
         if (course.length === 0) {
-          setError('Please choose at least one sport.');
+          setError('Please choose at least one course.');
           return;
         }
         break;
@@ -64,7 +63,7 @@ const CreateGroup = () => {
           return;
         }
         break;
-      case 6:
+      case 3:
         if (description.length <= 9) {
           setError('Description must be at least 10 characters.');
           return;
@@ -96,13 +95,13 @@ const CreateGroup = () => {
     setError(null);
     e.preventDefault();
     // Perform action to create the event using the provided data
-    console.log({ title, course, description, meetingDay });
+    console.log({ groupname, course, meetingDay, description, location, meetingTime})
 
     const newGroup = {
-      title,
+      groupname,
       course,
-      description,
       meetingDay,
+      description,
       location,
       meetingTime: meetingTime ? meetingTime.toLocaleTimeString() : null,
     };
@@ -142,10 +141,10 @@ const CreateGroup = () => {
         const updatedUser = await response2.json();
         console.log('User updated:', updatedUser);
       } catch (error) {
-        console.error('Failed to add event:', error);
+        console.error('Failed to add group:', error);
       }
       setError(null);
-      console.log('new event added', json);
+      console.log('new group added', json);
     }
 
     setIsSubmitted(true);
@@ -153,7 +152,7 @@ const CreateGroup = () => {
 
   const handleCreateAnotherGroup = () => {
     // Reset state variables to start a new event creation
-    setTitle('');
+    setGroupName('');
     setCourse('');
     setMeetingDay('');
     setDescription('');
@@ -229,19 +228,19 @@ const CreateGroup = () => {
       case 0:
         return (
           <FormControl>
-            <FormLabel htmlFor="title">Title</FormLabel>
+            <FormLabel htmlFor="title">Group Name</FormLabel>
             <Input
-              id="title"
+              id="groupname"
               type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={groupname}
+              onChange={(e) => setGroupName(e.target.value)}
             />
           </FormControl>
         );
       case 1:
         return (
           <FormControl>
-            <FormLabel htmlFor="sport">Choose a Course</FormLabel>
+            <FormLabel htmlFor="course">Choose a Course</FormLabel>
             {console.log('Options:', courseOptions)}
             <Select
               id="courses"
@@ -271,7 +270,7 @@ const CreateGroup = () => {
             />
           </FormControl>
         );
-      case 6:
+      case 3:
         return (
           <FormControl>
             <FormLabel htmlFor="description">Description</FormLabel>
@@ -392,6 +391,8 @@ const CreateGroup = () => {
 };
 
 export default CreateGroup;
+
+
 // import React, { useState, useEffect } from 'react';
 // import { Button } from '@mui/material';
 // import { useNavigate } from 'react-router-dom';
