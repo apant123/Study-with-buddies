@@ -95,7 +95,7 @@ userSchema.statics.signup = async function(email, password, userName, fullName, 
 
 userSchema.statics.findMatches = async function(userCourses) {
     const users = await this.find({
-        sports: { $in: userCourses }
+        courses: { $in: userCourses }
     });
     const result = [];
     await users.forEach(user => {

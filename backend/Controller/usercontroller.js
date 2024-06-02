@@ -65,9 +65,9 @@ const getAllUsers = async (req, res) => {
 
 
 const getUsers = async(req, res) => {
-    const { sports } = req.body
+    const { courses } = req.body
     try {
-        const users = await User.findMatches(sports)
+        const users = await User.findMatches(courses)
         if (!users){
             res.status(200).json("No matches")
         }
@@ -140,7 +140,7 @@ const addGroup = async (req, res) => {
                 res.status(500).json({error: 'Could not update the document'})
             })
     } else {
-        res.status(400).json({ error: 'Invalid user or event ID' });
+        res.status(400).json({ error: 'Invalid user or group ID' });
     }
 };
 
@@ -159,7 +159,7 @@ const removeGroup = async (req, res) => {
                 res.status(500).json({error: 'Could not update the document'})
             })
     } else {
-        res.status(400).json({ error: 'Invalid user or event ID' });
+        res.status(400).json({ error: 'Invalid user or group ID' });
     }
 };
 
@@ -179,7 +179,7 @@ const updateProfile = async (req, res) => {
                 res.status(500).json({error: 'Could not update the document'})
             })
     } else {
-        res.status(400).json({ error: 'Invalid user or event ID' });
+        res.status(400).json({ error: 'Invalid user or group ID' });
     }
 };
 
@@ -190,7 +190,7 @@ const updateUser = async (req, res) => {
         return res.status(404).json({error: 'No such User'})
     }
 
-    const event = await User.findOneAndUpdate({_id: id}, {
+    const group = await User.findOneAndUpdate({_id: id}, {
         ...req.body
     })
     if (!event) {

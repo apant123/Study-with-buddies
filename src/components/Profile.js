@@ -53,7 +53,7 @@ function Profile() {
       const response = await fetch(`/api/user/getUserById/${userId}`);
       const json = await response.json();
 
-      console.log(json.sports);
+      console.log(json.courses);
 
 
 

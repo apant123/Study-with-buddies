@@ -1,5 +1,5 @@
 const express = require('express');
-const Event = require('../models/groupModel')
+const Group = require('../models/groupModel')
 
 
 const route = express.Router()
