@@ -26,15 +26,15 @@ function Profile() {
   const { user } = useAuthContext();
   const userId = localStorage.getItem('userId');
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(true); // is user logged in?
+  const [loggedIn, setLoggedIn] = useState(false); // is user logged in?
   const [editMode, setEditMode] = useState(false);
   const [showPass, setShowPass] = useState(false);
 
-  const [fullName, setName] = useState('Sunny Vinay');
-  const [username, setUsername] = useState('sunnygotskillz');
-  const [email, setEmail] = useState('sunnyvinay7@gmail.com');
-  const [password, setPassword] = useState('pass123');
-  const [courses, setCourses] = useState('3');
+  const [fullName, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [courses, setCourses] = useState('');
   const [transformedCourses, setTCourses] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
