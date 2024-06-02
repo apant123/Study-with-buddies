@@ -47,6 +47,11 @@ function Profile() {
     logout()
   }
 
+  const handleCombinedClick = () => {
+    setEditMode(false);
+    handleSubmit();
+  };
+
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -186,7 +191,8 @@ function Profile() {
                 //   setEditMode(false);
                   
                 // }}
-                onClick = {handleSubmit}>
+                // onClick = {handleSubmit}
+                onClick={handleCombinedClick}>
 
                 Save Changes
               </Button>
