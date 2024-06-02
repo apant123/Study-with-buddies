@@ -66,14 +66,14 @@ userSchema.statics.signup = async function(email, password, userName, fullName, 
     if (!email || !password || !userName || !fullName || !courses) {
         throw Error('Fields must be filled out')
     }
-    /*
+    
     if (!validator.isEmail(email)) {
         throw Error('Invalid email')
     }
     if (!validator.isStrongPassword(password)) { throw Error ('Password weak')}
-    */
+    
     // email exists
-    console.log("trying singup")
+    console.log("trying signup")
     try {
         const alreadyExists = await this.findOne({ email })
         if(alreadyExists){
