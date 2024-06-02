@@ -193,10 +193,10 @@ const updateUser = async (req, res) => {
     const group = await User.findOneAndUpdate({_id: id}, {
         ...req.body
     })
-    if (!event) {
+    if (!group) {
         return res.status(404).json({error: 'No such User'})
     }
-    res.status(200).json(event)
+    res.status(200).json(group)
 }
 
 
