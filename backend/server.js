@@ -1,9 +1,3 @@
-
-
-
-
-
-
 require('dotenv').config();
 
 const express = require('express');
@@ -34,5 +28,5 @@ mongoose.connect(uri) //process.env.MONGO_URI)
     })
   })
   .catch((error) => {
-    console.log("This didn't work!!!!!!!!!!!!!!!")
+    console.log(error)
   })
