@@ -5,6 +5,12 @@ import './styles.css';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { CiEdit } from "react-icons/ci";
 import { MdSaveAs } from "react-icons/md";
+import courseOptions from './courseOptions';
+import { useAuthContext } from '../hooks/useAuthContext';
+import Select from 'react-select';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton } from '@chakra-ui/react';
+import { ChakraProvider, Text, FormControl, FormLabel, Input, Center, VStack } from '@chakra-ui/react';
+
 
 function hidePass(pass) {
   var str = '';
@@ -14,7 +20,11 @@ function hidePass(pass) {
   return str;
 }
 
+
+
 function Profile() {
+  const { user } = useAuthContext();
+  const userId = localStorage.getItem('userId');
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(true); // is user logged in?
   const [editMode, setEditMode] = useState(false);
@@ -24,7 +34,85 @@ function Profile() {
   const [username, setUsername] = useState('sunnygotskillz');
   const [email, setEmail] = useState('sunnyvinay7@gmail.com');
   const [password, setPassword] = useState('pass123');
-  const [courses, setCourses] = useState('19');
+  const [courses, setCourses] = useState('3');
+  const [transformedCourses, setTCourses] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const response = await fetch(`/api/user/getUserById/${userId}`);
+      const json = await response.json();
+
+      console.log(json.sports);
+
+
+
+
+      if (response.ok) {
+        setTCourses(json.courses.map((course) => ({ value: course, label: course })));
+        console.log(transformedCourses);
+        setCourses(json.courses);
+        setName(json.fullName);
+        setEmail(json.email);
+        setUsername(json.userName);
+      }
+    };
+
+    if (user) {
+      fetchProfile();
+    }
+  }, [user]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validation checks
+    const validationErrors = [];
+
+    if (!fullName.includes(' ')) {
+      validationErrors.push('Full Name must include first name and last name separated by a space.');
+    }
+
+    if (courses.length < 3) {
+      validationErrors.push('Please choose at least three courses.');
+    }
+
+    if (username.length < 5) {
+      validationErrors.push('Username must be at least 5 characters.');
+    }
+
+    if (validationErrors.length > 0) {
+      alert(validationErrors.join('\n'));
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/user/updateProfile/${userId}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ fullName, courses, email, username }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      } else {  
+        const updatedUser = await response.json();
+        console.log('User updated:', updatedUser);
+        setIsModalOpen(true);
+
+
+      }
+    } catch (error) {
+      console.error('Failed to update user');
+    }
+  };
   
   return (
     <>
