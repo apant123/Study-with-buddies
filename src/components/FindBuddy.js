@@ -22,7 +22,7 @@ import './styles.css';
 //   }
 // }
 
-const Group = mongoose.model('Group', GroupSchema);
+// const Group = mongoose.model('Group', GroupSchema);
 
 // Function to search groups by course
 // const searchGroupsByCourse = async (course) => {
