@@ -9,9 +9,9 @@ import './styles.css';
 //       await client.connect();
 //       console.log('Connected successfully to server');
 
-//       const db = client.db(dbName);
-//       const collection = db.collection('your_collection_name');
-//       const courseFilter = { course: 'YourCourseName' };
+//       const db = client.db("35L");
+//       const collection = db.collection('groups');
+//       const courseFilter = { course: 'YourCourseName' }; // Get input from textbox ???
       
 //       const results = await collection.find(courseFilter).toArray();
       
@@ -21,6 +21,28 @@ import './styles.css';
 //       await client.close();
 //   }
 // }
+
+const Group = mongoose.model('Group', GroupSchema);
+
+// Function to search groups by course
+// const searchGroupsByCourse = async (course) => {
+//     try {
+//         const groups = await Group.find({ course });
+//         if (groups.length > 0) {
+//             console.log(`Groups found for course "${course}":`);
+//             groups.forEach(group => {
+//                 console.log(`- Group: ${group.name}, Course: ${group.course}`);
+//             });
+//         } else {
+//             console.log(`No groups found for course "${course}".`);
+//         }
+//     } catch (err) {
+//         console.error('Error searching for groups:', err.message);
+//     } finally {
+//         mongoose.connection.close();
+//     }
+// };
+
 
 function FindBuddy() {
   const navigate = useNavigate();

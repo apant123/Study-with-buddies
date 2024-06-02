@@ -7,6 +7,25 @@ const getAllGroups = async (req, res) => {
     const groups = await Group.find({}).sort({createdAt: -1})
     res.status(200).json(groups)
 }
+const searchGroupsByCourse = async (course) => {
+    try {
+        const groups = await Group.find({ course });
+        if (groups.length > 0) {
+            console.log(`Groups found for course "${course}":`);
+            groups.forEach(group => {
+                console.log(`- Group: ${group.name}, Course: ${group.course}`);
+            });
+        } else {
+            console.log(`No groups found for course "${course}".`);
+        }
+    } catch (err) {
+        console.error('Error searching for groups:', err.message);
+    } finally {
+        mongoose.connection.close();
+    }
+};
+
+
 // get a single group
 const getGroup = async (req, res) => {
     const { id } = req.params
