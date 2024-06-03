@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import './styles.css';
 import { useAuthContext } from "../hooks/useAuthContext";
 import courseOptions from './courseOptions';
+const { getUser } = require('../Controller/groupcontroller');
 
 function JoinGroup() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function JoinGroup() {
     setCourse(value);
   };
 
-  const findGroup = (course) => {
+  const findGroup = async (course) => {
     // Find group from given course
   };
 
@@ -50,7 +51,7 @@ function JoinGroup() {
                 </Select>
               </FormControl>
 
-              <Button variant="contained" color="primary" size="large" onClick={findGroup(course)}>Find Group</Button>
+              <Button variant="contained" color="primary" size="large" onClick={searchGroupsByCourse(course)}>Find Group</Button>
             </Stack>
           </div> 
         : 
