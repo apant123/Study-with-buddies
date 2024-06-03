@@ -17,8 +17,23 @@ function JoinGroup() {
 
   const findGroup = async (course) => {
     try {
-      const response = await axios.post('/api/groups/search', { course }); // Adjust the endpoint as necessary
+      /*const response = await axios.post('/api/groups/search', { course }); // Adjust the endpoint as necessary
       const groups = response.data;
+      */
+      const response = await fetch('/api/groups/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ course }), // Sending course as a string
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const groups = await response.json();
+
 
       if (groups.length > 0) {
         console.log(`Groups found for course "${course}":`);

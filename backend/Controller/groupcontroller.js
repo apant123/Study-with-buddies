@@ -11,11 +11,11 @@ const searchGroupsByCourse = async (req, res) => {
     const course = req.body;
     console.log(course);
     try {
-        const groups = await Group.find({ course });
+        const groups = await Group.find(course);
         if (groups.length > 0) {
             console.log(`Groups found for course "${course}":`);
             groups.forEach(group => {
-                console.log(`- Group: ${group.name}, Course: ${group.course}`);
+                console.log(`- Group: ${group.groupname}, Course: ${group.course}`);
             });
         } else {
             console.log(`No groups found for course "${course}".`);
