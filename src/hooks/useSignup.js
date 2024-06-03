@@ -32,8 +32,8 @@ import { useAuthContext } from "./useAuthContext"
             localStorage.setItem('userId', json.userId)
             console.log(localStorage.getItem('userId'))
             
-            // update the auth context
-            dispatch({type: 'LOGIN', payload: json})
+            // do not login with signup, just redirect to login
+            //dispatch({type: 'LOGIN', payload: json})
 
             setIsLoading(false)
         }
