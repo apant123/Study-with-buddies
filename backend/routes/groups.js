@@ -10,13 +10,16 @@ const {
    getGroup,
    getAllGroups,
    deleteGroup,
-   updateGroup
+   updateGroup,
+   searchGroups
 } = require('../Controller/groupcontroller')
 
 route.get('/', getAllGroups)
 
 route.get('/:id', getGroup)
   
+route.patch('/searchGroupsByCourse/:id', searchGroups);
+
 route.post('/', createGroup)
   
 route.delete('/:id', deleteGroup)
