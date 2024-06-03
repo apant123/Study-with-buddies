@@ -19,7 +19,7 @@ route.get('/', getAllGroups)
 
 route.get('/:id', getGroup)
   
-route.patch('/:id', searchGroupsByCourse);
+route.get('/:id', searchGroupsByCourse)
 
 route.post('/', createGroup)
   
