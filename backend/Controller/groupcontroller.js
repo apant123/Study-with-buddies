@@ -23,6 +23,7 @@ const searchGroupsByCourse = async (req, res) => {
     } catch (err) {
         console.error('Error searching for groups:', err.message);
     } 
+    res.status(200).json(groups)
 };
 
 
