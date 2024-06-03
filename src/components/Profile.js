@@ -15,7 +15,6 @@ function Profile() {
   const [fullName, setName] = useState('');
   const [courses, setCourses] = useState([]);
   const [transformedCourses, setTCourses] = useState([]);
-  const [password, setPassword] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalClose = () => {
@@ -54,18 +53,6 @@ function Profile() {
     if (username.length < 5) {
       validationErrors.push('Username must be at least 5 characters.');
     }
-    if (password.length < 8) {
-      validationErrors.push('Password must be at least 8 characters.');
-    }
-    if (!/[A-Z]/.test(password)) {
-      validationErrors.push('Password must contain at least one uppercase letter.');
-    }
-    if (!/[a-z]/.test(password)) {
-      validationErrors.push('Password must contain at least one lowercase letter.');
-    }
-    if (!/\d/.test(password)) {
-      validationErrors.push('Password must contain at least one digit.');
-    }
 
     if (validationErrors.length > 0) {
       alert(validationErrors.join('\n'));
@@ -75,7 +62,7 @@ function Profile() {
     try {
       const response = await fetch(`/api/user/updateProfile/${userId}`, {
         method: 'PATCH',
-        body: JSON.stringify({ fullName, courses, email, username, password }),
+        body: JSON.stringify({ fullName, courses, email, username }),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -142,17 +129,6 @@ function Profile() {
                 name="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                fontSize="lg"
-              />
-            </FormControl>
-
-            <FormControl id="password" isRequired mb="3">
-              <FormLabel fontSize="lg">Password</FormLabel>
-              <Input
-                type="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
                 fontSize="lg"
               />
             </FormControl>
