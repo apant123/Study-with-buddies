@@ -28,8 +28,6 @@ route.patch('/addGroup/:id', addGroup);
 
 route.patch('/removeGroup/:id', removeGroup);
 
-route.patch('/searchGroupsByCourse/:id', searchGroups);
-
 route.get('/getUserGroups/:id', getUserGroups); // Assuming this is the correct function name
 
 route.get('/getAllUsers', getAllUsers);
