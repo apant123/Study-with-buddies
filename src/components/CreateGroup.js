@@ -393,10 +393,11 @@ const CreateGroup = () => {
     :
     <div style={{ marginTop: 40, textAlign: 'center' }}>
       <p style={{fontSize: 30}}><b>You are not logged in. Please login to join study groups!</b></p>
-      <Button colorScheme='blue' variant='solid' size='md' onClick={() => navigate('/login')}>
-        Login
-      </Button>
+      <ChakraProvider><Button marginTop="10px" colorScheme="blue" size='md' onClick={() => navigate('/login')}>
+        LOGIN
+      </Button></ChakraProvider>
     </div>
+    
   }
   </>
   );

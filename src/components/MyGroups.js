@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { ChakraProvider, Box, Button, Flex, Text } from '@chakra-ui/react';
+import { Button, Box, Typography } from '@mui/material';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function MyGroups() {
   const userId = localStorage.getItem('userId');
   const { user } = useAuthContext();
   const [groups, setGroups] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (groupId) => {
     try {
@@ -54,8 +56,9 @@ function MyGroups() {
   }, [userId, user]);
 
   return (
-    <ChakraProvider>
-      <Box bg="white" className="home" mt="102px" ml={4} mr={4} style={{ zIndex: 1 }}>
+    <>
+    {user ?
+      <Box bg="white" className="home" mt="50px" ml={4} mr={4} style={{ zIndex: 1 }}>
         <Box
           className="groups"
           display="grid"
@@ -73,19 +76,17 @@ function MyGroups() {
                 mb={4}
                 style={{ zIndex: 3, backgroundColor: '#f0f9ff' }}
               >
-                <Text fontSize="lg" fontWeight="bold" mb={2}>
+                <Typography fontSize="lg" fontWeight="bold" mb={2}>
                   {group.groupname}
-                </Text>
-                <Text>Course: {group.course}</Text>
-                <Text>Date: {new Date(group.meetingDay).toLocaleDateString('en-US')}</Text>
-                <Text>Time: {group.meetingTime}</Text>
-                <Text>Location: {group.location}</Text>
-                <Text>Description: {group.description}</Text>
-                <Button
-                  mt={4}
-                  bg="#e53e3e"
-                  color="white"
-                  size="sm"
+                </Typography>
+                <Typography>Course: {group.course}</Typography>
+                <Typography>Date: {new Date(group.meetingDay).toLocaleDateString('en-US')}</Typography>
+                <Typography>Time: {group.meetingTime}</Typography>
+                <Typography>Location: {group.location}</Typography>
+                <Typography>Description: {group.description}</Typography>
+                <Button style={{ backgroundColor: "#e53e3e", marginTop: "10px"}}
+                  variant="contained"
+                  size="small"
                   onClick={() => handleSubmit(group._id)}
                 >
                   Leave Group
@@ -94,7 +95,15 @@ function MyGroups() {
             ))}
         </Box>
       </Box>
-    </ChakraProvider>
+    :
+    <div style={{ marginTop: 40, textAlign: 'center' }}>
+      <p style={{fontSize: 30}}><b>You are not logged in. Please login to join study groups!</b></p>
+      <Button variant="contained" color="primary" size="large" onClick={() => navigate('/login')}>
+        Login
+      </Button>
+    </div>
+    }
+    </>
   );
 }
 
