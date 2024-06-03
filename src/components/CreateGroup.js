@@ -17,6 +17,7 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { ChakraProvider } from '@chakra-ui/react';
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const CreateGroup = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -29,7 +30,7 @@ const CreateGroup = () => {
   const userId = localStorage.getItem('userId');
   const [location, setLocation] = useState('');  // Meeting Location
   const [meetingTime, setMeetingTime] = useState(null);  // Meeting time
-  // console.log(jsonId)
+  const {user} = useAuthContext();
 
   const navigate = useNavigate();
 
@@ -318,6 +319,8 @@ const CreateGroup = () => {
   };
 
   return (
+    <>
+    {user ?
     <ChakraProvider>
       <Container
         maxW="lg"
@@ -387,6 +390,15 @@ const CreateGroup = () => {
         </Stack>
       </Container>
     </ChakraProvider>
+    :
+    <div style={{ marginTop: 40, textAlign: 'center' }}>
+      <p style={{fontSize: 30}}><b>You are not logged in. Please login to join study groups!</b></p>
+      <Button colorScheme='blue' variant='solid' size='md' onClick={() => navigate('/login')}>
+        Login
+      </Button>
+    </div>
+  }
+  </>
   );
 };
 

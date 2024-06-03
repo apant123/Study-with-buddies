@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './styles.css';
+import { useAuthContext } from "../hooks/useAuthContext";
 
 // async function searchGroups() {
 //   try {
@@ -46,12 +47,12 @@ import './styles.css';
 
 function FindBuddy() {
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(false); // is user logged in?
+  const {user} = useAuthContext();
 
   return (
     <>
-        {loggedIn ? 
-          null 
+        {user ? 
+          <p>You are logged in.</p> 
         : 
         <div style={{ marginTop: 40, textAlign: 'center' }}>
           <p style={{fontSize: 30}}><b>You are not logged in. Please login to find study buddies!</b></p>
