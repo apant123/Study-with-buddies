@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { ChakraProvider, Box, Table,Tbody, Tr, Td, Input, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button } from '@chakra-ui/react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function FindUsers() {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedUser, setSelectedUser] = useState(null);
   const { user } = useAuthContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -39,6 +41,8 @@ function FindUsers() {
   };
 
   return (
+    <>
+    {user ?
     <ChakraProvider>
       <div style={{ textAlign: 'center', paddingTop: '15vh' }}>
         <Link to="/findusermatch" style={{ textDecoration: 'none' }}>
@@ -109,6 +113,15 @@ function FindUsers() {
         </Modal>
       </Box>
     </ChakraProvider>
+    :
+    <div style={{ marginTop: 40, textAlign: 'center' }}>
+      <p style={{fontSize: 30}}><b>You are not logged in. Please login to find study buddies!</b></p>
+      <ChakraProvider><Button marginTop="10px" colorScheme="blue" size='md' onClick={() => navigate('/login')}>
+        LOGIN
+      </Button></ChakraProvider>
+    </div>
+    }
+    </>
   );
 }
 

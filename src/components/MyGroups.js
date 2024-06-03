@@ -97,7 +97,7 @@ function MyGroups() {
       </Box>
     :
     <div style={{ marginTop: 40, textAlign: 'center' }}>
-      <p style={{fontSize: 30}}><b>You are not logged in. Please login to join study groups!</b></p>
+      <p style={{fontSize: 30}}><b>You are not logged in. Please login to see your study groups!</b></p>
       <Button variant="contained" color="primary" size="large" onClick={() => navigate('/login')}>
         Login
       </Button>
