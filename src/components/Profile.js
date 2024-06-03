@@ -88,7 +88,6 @@ function Profile() {
 
   return (
     <>
-    {user ?
     <ChakraProvider>
       <Center bg="#f0f9ff">
         <VStack mt="20" spacing="4" align="center" justify="center" p="4" borderRadius="lg" boxShadow="lg" w="lg" maxW="100%" bg="whiteAlpha.800">
@@ -172,9 +171,6 @@ function Profile() {
         </ModalContent>
       </Modal>
     </ChakraProvider>
-    :
-    null
-  }
   </>
   );
 }
