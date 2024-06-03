@@ -39,7 +39,7 @@ function App() {
             <Route path="/mygroups" element={<MyGroups />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={user ? <Navigate to="/profile" /> : <Login />} />
-            <Route path="/signup" element={user ? <Navigate to="/profile" /> : <Signup />} />
+            <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </div>
