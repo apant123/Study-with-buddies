@@ -11,6 +11,7 @@ export default function Nav() {
         <CustomLink to="/findbuddy"><b>Find Buddies</b></CustomLink>
         <CustomLink to="/joingroup"><b>Join Group</b></CustomLink>
         <CustomLink to="/creategroup"><b>Create Group</b></CustomLink>
+        <CustomLink to="/mygroups"><b>My Groups</b></CustomLink>
         <CustomLink to="/profile"><CgProfile size={35}/></CustomLink>
       </ul>
     </nav>
