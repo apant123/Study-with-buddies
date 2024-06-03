@@ -11,14 +11,14 @@ const {
    getAllGroups,
    deleteGroup,
    updateGroup,
-   searchGroups
+   searchGroupsByCourse
 } = require('../Controller/groupcontroller')
 
 route.get('/', getAllGroups)
 
 route.get('/:id', getGroup)
   
-route.patch('/searchGroupsByCourse/:id', searchGroups);
+route.patch('/:id', searchGroupsByCourse);
 
 route.post('/', createGroup)
   
