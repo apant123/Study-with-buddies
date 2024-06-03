@@ -77,10 +77,10 @@ function MyGroups() {
                   {group.groupname}
                 </Text>
                 <Text>Course: {group.course}</Text>
-                <Text>Date: {new Date(group.groupDate).toLocaleDateString('en-US')}</Text>
-                <Text>Time: {group.groupTime}</Text>
+                <Text>Date: {new Date(group.meetingDay).toLocaleDateString('en-US')}</Text>
+                <Text>Time: {group.meetingTime}</Text>
                 <Text>Location: {group.location}</Text>
-                <Text></Text>
+                <Text>Description: {group.description}</Text>
                 <Button
                   mt={4}
                   bg="#e53e3e"
