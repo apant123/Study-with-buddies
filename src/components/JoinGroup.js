@@ -51,7 +51,7 @@ function JoinGroup() {
                 </Select>
               </FormControl>
 
-              <Button variant="contained" color="primary" size="large" onClick={searchGroups(course)}>Find Group</Button>
+              <Button variant="contained" color="primary" size="large" onClick={() => navigate('/searchGroupsByCourse/:id')}>Find Group</Button>
             </Stack>
           </div> 
         : 
