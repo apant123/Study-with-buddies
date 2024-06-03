@@ -30,6 +30,7 @@ import { useAuthContext } from "./useAuthContext"
             // savc user to local storage
             localStorage.setItem('user', JSON.stringify(json))
             localStorage.setItem('userId', json.userId)
+            console.log(localStorage.getItem('userId'))
             
             // update the auth context
             dispatch({type: 'LOGIN', payload: json})

@@ -29,8 +29,10 @@ function Profile() {
     logout();
   }
 
-  useEffect(() => {
+  useEffect(() => {  
+    
     const fetchProfile = async () => {
+      console.log(userId);
       const response = await fetch(`/api/user/getUserById/${userId}`);
       const json = await response.json();
 

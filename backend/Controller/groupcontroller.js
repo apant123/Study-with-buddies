@@ -7,7 +7,8 @@ const getAllGroups = async (req, res) => {
     const groups = await Group.find({}).sort({createdAt: -1})
     res.status(200).json(groups)
 }
-const searchGroupsByCourse = async (course) => {
+const searchGroupsByCourse = async (req, res) => {
+    const courses = req.body
     try {
         const groups = await Group.find({ course });
         if (groups.length > 0) {
@@ -101,4 +102,5 @@ module.exports = {
     createGroup,
     deleteGroup,
     updateGroup,
+    searchGroupsByCourse
 }
