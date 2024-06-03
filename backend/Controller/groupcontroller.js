@@ -20,6 +20,7 @@ const searchGroupsByCourse = async (req, res) => {
         } else {
             console.log(`No groups found for course "${course}".`);
         }
+        res.status(200).json(groups)
     } catch (err) {
         console.error('Error searching for groups:', err.message);
     } 
