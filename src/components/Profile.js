@@ -90,6 +90,7 @@ function Profile() {
 
   return (
     <>
+    {user ?
     <ChakraProvider>
       <Center bg="#f0f9ff">
         <VStack mt="20" spacing="4" align="center" justify="center" p="4" borderRadius="lg" boxShadow="lg" w="lg" maxW="100%" bg="whiteAlpha.800">
@@ -173,6 +174,14 @@ function Profile() {
         </ModalContent>
       </Modal>
     </ChakraProvider>
+    :
+    <div style={{ marginTop: 40, textAlign: 'center' }}>
+      <p style={{fontSize: 30}}><b>You are not logged in. Please login to check your profile!</b></p>
+      <ChakraProvider><Button marginTop="10px" colorScheme="blue" size='md' onClick={() => navigate('/login')}>
+        LOGIN
+      </Button></ChakraProvider>
+    </div>
+    }
   </>
   );
 }
