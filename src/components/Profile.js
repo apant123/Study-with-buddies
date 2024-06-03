@@ -106,6 +106,17 @@ function Profile() {
               />
             </FormControl>
 
+            <FormControl id="username" isRequired mb="3">
+              <FormLabel fontSize="lg">Username</FormLabel>
+              <Input
+                type="text"
+                name="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                fontSize="lg"
+              />
+            </FormControl>
+
             <FormControl id="email" isRequired mb="3">
               <FormLabel fontSize="lg">Email</FormLabel>
               <Input
@@ -127,17 +138,6 @@ function Profile() {
                   setCourses(selectedOptions.map((option) => option.value));
                   setTCourses(selectedOptions);
                 }}
-              />
-            </FormControl>
-
-            <FormControl id="username" isRequired mb="3">
-              <FormLabel fontSize="lg">Username</FormLabel>
-              <Input
-                type="text"
-                name="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                fontSize="lg"
               />
             </FormControl>
 
