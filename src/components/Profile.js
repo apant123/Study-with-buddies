@@ -5,21 +5,29 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton } from '@chakra-ui/react';
 import { ChakraProvider, Text, FormControl, FormLabel, Input, Button, Center, VStack } from '@chakra-ui/react';
+import {useLogout} from '../hooks/useLogout';
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 // import 'react-toastify/dist/ReactToastify.css';
 
 function Profile() {
   const { user } = useAuthContext();
   const userId = localStorage.getItem('userId');
+  const {logout} = useLogout();
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [fullName, setName] = useState('');
   const [courses, setCourses] = useState([]);
   const [transformedCourses, setTCourses] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+  const handleLogout = () => {
+    logout();
+  }
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -137,6 +145,12 @@ function Profile() {
               Save Profile
             </Button>
           </form>
+          <Button bg="#fc5858" colorScheme="red" textColor="white" mt="4" fontSize="lg" onClick={() => {
+            handleLogout();
+            navigate("/");
+            }}>
+              Logout
+          </Button>
         </VStack>
       </Center>
 
