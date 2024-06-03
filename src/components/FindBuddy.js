@@ -1,49 +1,125 @@
 import React, { useState, useEffect } from 'react';
+import { ChakraProvider, Box, Table,Tbody, Tr, Td, Input, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button } from '@chakra-ui/react';
+import { useAuthContext } from '../hooks/useAuthContext';
+import { Link } from 'react-router-dom';
+
+function FindUsers() {
+  const [users, setUsers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedUser, setSelectedUser] = useState(null);
+  const { user } = useAuthContext();
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await fetch('/api/user/getUsers'); // Adjust the endpoint to your needs
+      const json = await response.json();
+
+      if (response.ok) {
+        setUsers(json);
+      }
+    };
+
+    if (user) {
+      fetchUsers();
+    } else {
+      console.log("no user");
+    }
+  }, [user]);
+
+  const filteredUsers = users.filter((userD) => 
+    userD.fullName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleUserClick = (user) => {
+    setSelectedUser(user);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedUser(null);
+  };
+
+  return (
+    <ChakraProvider>
+      <div style={{ textAlign: 'center', paddingTop: '15vh' }}>
+        <Link to="/findusermatch" style={{ textDecoration: 'none' }}>
+          <Button
+            variant="contained"
+            color="primary"
+            style={{
+              background: 'linear-gradient(to right, #7dd3fc, #075985)',
+              color: 'white',
+              fontSize: '1.5em',
+              padding: '15px 15px',
+            }}
+          >
+            Find Buddy!
+          </Button>
+        </Link>
+      </div>
+      <Box
+        bgGradient="linear(to-b, #7dd3fc, #075985)"
+        className="home"
+        mt="20px"
+        paddingLeft="10px"
+        paddingRight="10px"
+        paddingTop="10px"
+      >
+        {/* Search Bar */}
+        <Input
+          bg="white"
+          type="text"
+          placeholder="Search by full name"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          mb={4}
+        />
+
+        <Table variant="simple" size="md">
+          <Tbody>
+            {filteredUsers.map((userD) => (
+              <Tr key={userD._id} onClick={() => handleUserClick(userD)}>
+                <Td fontSize="lg" fontWeight="bold">
+                  {userD.fullName}
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+
+        <Modal isOpen={selectedUser !== null} onClose={handleCloseModal}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>User Information</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              {selectedUser && (
+                <div>
+                  <p>Name: {selectedUser.fullName}</p>
+                  <p>Email: {selectedUser.email}</p>
+                  <p>Courses: {selectedUser.courses}</p>
+                </div>
+              )}
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="blue" onClick={handleCloseModal}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </Box>
+    </ChakraProvider>
+  );
+}
+
+export default FindUsers;
+
+
+/*import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './styles.css';
 import { useAuthContext } from "../hooks/useAuthContext";
-
-// async function searchGroups() {
-//   try {
-//       // Connect to the MongoDB server
-//       await client.connect();
-//       console.log('Connected successfully to server');
-
-//       const db = client.db("35L");
-//       const collection = db.collection('groups');
-//       const courseFilter = { course: 'YourCourseName' }; // Get input from textbox ???
-      
-//       const results = await collection.find(courseFilter).toArray();
-      
-//       console.log('Found documents:', results);
-//   } finally {
-
-//       await client.close();
-//   }
-// }
-
-// const Group = mongoose.model('Group', GroupSchema);
-
-// Function to search groups by course
-// const searchGroupsByCourse = async (course) => {
-//     try {
-//         const groups = await Group.find({ course });
-//         if (groups.length > 0) {
-//             console.log(`Groups found for course "${course}":`);
-//             groups.forEach(group => {
-//                 console.log(`- Group: ${group.name}, Course: ${group.course}`);
-//             });
-//         } else {
-//             console.log(`No groups found for course "${course}".`);
-//         }
-//     } catch (err) {
-//         console.error('Error searching for groups:', err.message);
-//     } finally {
-//         mongoose.connection.close();
-//     }
-// };
-
 
 function FindBuddy() {
   const navigate = useNavigate();
@@ -66,3 +142,4 @@ function FindBuddy() {
 }
 
 export default FindBuddy;
+*/
