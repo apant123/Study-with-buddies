@@ -10,7 +10,7 @@ const uri = "mongodb+srv://aravpant17:E9lDK3ziORyTkPJM@35l.3doatcn.mongodb.net/?
 const app = express();
 app.use(express.json())
 
-
+//middlewars -> used for cors
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next()
@@ -21,10 +21,10 @@ app.use('/api/groups', groupRoutes)
 app.use('/api/user', userRoutes)
 
 // db connect
-mongoose.connect(uri) //process.env.MONGO_URI)
+mongoose.connect(uri) //connecets to the mongo atlas db server
   .then(() => { 
-    app.listen(4000, () => { //process.env.PORT
-      console.log('Connected to db and listening on port 4000!');
+    app.listen(4000, () => { // use local host 4000
+      console.log('Connected to db and listening on port 4000');
     })
   })
   .catch((error) => {
