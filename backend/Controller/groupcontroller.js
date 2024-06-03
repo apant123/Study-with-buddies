@@ -8,7 +8,8 @@ const getAllGroups = async (req, res) => {
     res.status(200).json(groups)
 }
 const searchGroupsByCourse = async (req, res) => {
-    const courses = req.body
+    const course = req.body;
+    console.log(course);
     try {
         const groups = await Group.find({ course });
         if (groups.length > 0) {

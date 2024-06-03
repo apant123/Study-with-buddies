@@ -19,7 +19,7 @@ route.get('/', getAllGroups)
 
 route.get('/:id', getGroup)
   
-route.get('/:id', searchGroupsByCourse)
+route.post('/search', searchGroupsByCourse)
 
 route.post('/', createGroup)
   
