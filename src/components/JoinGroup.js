@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Stack, InputLabel, MenuItem, Select, FormControl } from '@mui/material';
+import { Button, Stack, InputLabel, MenuItem, Select, FormControl, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Import axios for making HTTP requests
 import './styles.css';
@@ -10,6 +10,7 @@ function JoinGroup() {
   const navigate = useNavigate();
   const { user } = useAuthContext();
   const [course, setCourse] = useState('');
+  const [groups, setGroups] = useState([]);
 
   const handleChange = (event) => {
     setCourse(event.target.value);
@@ -33,15 +34,16 @@ function JoinGroup() {
       }
 
       const groups = await response.json();
-
+      console.log(groups)
 
       if (groups.length > 0) {
         console.log(`Groups found for course "${course}":`);
         groups.forEach(group => {
           console.log(`- Group: ${group.name}, Course: ${group.course}`);
         });
+        setGroups(groups)
         // Navigate to the groups page or handle the group data as needed
-        navigate(`/${course}`); // Adjust this to your needs
+        //navigate(`/${course}`); // Adjust this to your needs
       } else {
         console.log(`No groups found for course "${course}".`);
         alert(`No groups found for course "${course}".`);
@@ -90,6 +92,31 @@ function JoinGroup() {
               Find Group
             </Button>
           </Stack>
+          {groups.length > 0 && (
+          <Box mt={4}>
+            <Typography variant="h5">Groups Found:</Typography>
+
+            {groups.map((group) => (
+              <Box key={group._id} mt={2} p={2} border="1px solid #ccc" borderRadius={4}>
+                <Typography variant="subtitle1">{group.groupname}</Typography>
+                <Typography>Course: {group.course}</Typography>
+                <Typography>Date: {new Date(group.meetingDay).toLocaleDateString('en-US')}</Typography>
+                <Typography>Time: {group.meetingTime}</Typography>
+                <Typography>Location: {group.location}</Typography>
+                <Typography>Description: {group.description}</Typography>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  //onClick={() => }
+                  mt={2}
+                >
+                  View Group
+                </Button>
+              </Box>
+            ))}
+          </Box>)}
+
+        
         </div>
       ) : (
         <div style={{ marginTop: 40, textAlign: 'center' }}>
