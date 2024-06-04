@@ -215,7 +215,7 @@ const getUsersbyCourse = async (req, res) => {
     console.log("Here");
     console.log("Here");
     console.log("Here");
-    console.log(course);
+   // console.log(course);
     const { course } = req.body;
     console.log("Course received:", course);
   
