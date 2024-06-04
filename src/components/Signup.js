@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import { useState } from 'react';
-import { useSignup } from "../hooks/useSignup"
+import { useSignup } from "../hooks/useSignup";
 import { useNavigate } from 'react-router-dom';
 import courseOptions from './courseOptions';
 
@@ -27,7 +27,7 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [userName, setUser] = useState('');
   const [fullName, setName] = useState('');
-  const [courses, setCourses] = useState('');
+  const [courses, setCourses] = useState([]);
   const { signup, error, isLoading } = useSignup();
 
   const navigate = useNavigate();
@@ -39,9 +39,9 @@ function Signup() {
     const validationErrors = [];
 
     if (!fullName.includes(' ')) {
-     validationErrors.push('Full Name must include first name and last name separated by a space.');
+      validationErrors.push('Full Name must include first name and last name separated by a space.');
     }
-    
+
     if (userName.length < 5) {
       validationErrors.push('Username must be at least 5 characters.');
     }
@@ -51,33 +51,37 @@ function Signup() {
       validationErrors.push('Password must be at least 8 characters.');
     }
 
-     if (!/[A-Z]/.test(password)) {
-       validationErrors.push('Password must contain at least one uppercase letter.');
-     }
+    if (!/[A-Z]/.test(password)) {
+      validationErrors.push('Password must contain at least one uppercase letter.');
+    }
 
-     if (!/[a-z]/.test(password)) {
-       validationErrors.push('Password must contain at least one lowercase letter.');
-     }
+    if (!/[a-z]/.test(password)) {
+      validationErrors.push('Password must contain at least one lowercase letter.');
+    }
 
-     if (!/\d/.test(password)) {
-       validationErrors.push('Password must contain at least one digit.');
-     }
+    if (!/\d/.test(password)) {
+      validationErrors.push('Password must contain at least one digit.');
+    }
 
-     if(courses.length < 3) {
-       validationErrors.push('Must choose at least 3 courses')
-     }
+    if (courses.length < 3) {
+      validationErrors.push('Must choose at least 3 courses');
+    }
 
-     if (validationErrors.length > 0) {
-       // Display all validation errors
-       alert(validationErrors.join('\n'));
-       return;
-     }  
+    if (validationErrors.length > 0) {
+      // Display all validation errors
+      alert(validationErrors.join('\n'));
+      return;
+    }
 
-    //If no validation errors, proceed with signup
-    await signup(email, password, userName, fullName, courses);
-    navigate('/login');
+    // If no validation errors, proceed with signup
+    const response = await signup(email, password, userName, fullName, courses);
+
+    if (response && response.error) {
+      alert(response.error); // Show alert if there is an error from the server
+    } else {
+      navigate('/login');
+    }
   };
-
 
   return (
     <ChakraProvider>
@@ -179,7 +183,6 @@ function Signup() {
                   </FormControl>
                   <FormControl>
                     <FormLabel htmlFor="courses">Courses</FormLabel>
-                    {console.log('Options:', courseOptions)} {/* Add this line */}
                     <Select
                       id="courses"
                       options={courseOptions}
@@ -187,9 +190,8 @@ function Signup() {
                       onChange={(selectedOptions) =>
                         setCourses(selectedOptions.map((option) => option.value))
                       }
-                    ></Select>
+                    />
                   </FormControl>
-                  
                 </Stack>
                 <Divider />
                 <Stack spacing="6">
@@ -200,7 +202,7 @@ function Signup() {
                       color: 'white',
                       margin: '10px',
                     }}
-                    onClick={handleSubmit}
+                    type="submit"
                     disabled={isLoading}
                   >
                     Sign up
