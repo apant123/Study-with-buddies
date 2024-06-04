@@ -83,7 +83,7 @@ const [users, setUsers] = useState([]);
               color="primary"
               size="large"
               onClick={() => {
-                if (course) {
+                if (courseOptions) {
                   findUsers(course);
                 } else {
                   alert("Please select a course");

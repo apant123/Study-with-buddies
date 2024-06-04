@@ -11,16 +11,36 @@ function JoinGroup() {
   const { user } = useAuthContext();
   const [course, setCourse] = useState('');
   const [groups, setGroups] = useState([]);
+  const userId = localStorage.getItem('userId');
 
   const handleChange = (event) => {
     setCourse(event.target.value);
   };
 
+  const addToGroup = async (groupId) => {
+    try {
+      const jsonId = { myGroups: groupId };
+      const response2 = await fetch(`/api/user/addGroup/${userId}`, {
+        method: 'PATCH',
+        body: JSON.stringify(jsonId),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response2.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const updatedUser = await response2.json();
+      console.log('User updated:', updatedUser);
+    } catch (error) {
+      console.error('Failed to add to group:', error);
+    }
+  };
+
   const findGroup = async (course) => {
     try {
-      /*const response = await axios.post('/api/groups/search', { course }); // Adjust the endpoint as necessary
-      const groups = response.data;
-      */
       const response = await fetch('/api/groups/search', {
         method: 'POST',
         headers: {
@@ -34,16 +54,14 @@ function JoinGroup() {
       }
 
       const groups = await response.json();
-      console.log(groups)
+      console.log(groups);
 
       if (groups.length > 0) {
         console.log(`Groups found for course "${course}":`);
         groups.forEach(group => {
           console.log(`- Group: ${group.name}, Course: ${group.course}`);
         });
-        setGroups(groups)
-        // Navigate to the groups page or handle the group data as needed
-        //navigate(`/${course}`); // Adjust this to your needs
+        setGroups(groups);
       } else {
         console.log(`No groups found for course "${course}".`);
         alert(`No groups found for course "${course}".`);
@@ -93,30 +111,28 @@ function JoinGroup() {
             </Button>
           </Stack>
           {groups.length > 0 && (
-          <Box mt={4}>
-            <Typography variant="h5">Groups Found:</Typography>
-
-            {groups.map((group) => (
-              <Box key={group._id} mt={2} p={2} border="1px solid #ccc" borderRadius={4}>
-                <Typography variant="subtitle1">{group.groupname}</Typography>
-                <Typography>Course: {group.course}</Typography>
-                <Typography>Date: {new Date(group.meetingDay).toLocaleDateString('en-US')}</Typography>
-                <Typography>Time: {group.meetingTime}</Typography>
-                <Typography>Location: {group.location}</Typography>
-                <Typography>Description: {group.description}</Typography>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  //onClick={() => }
-                  mt={2}
-                >
-                  Join Group
-                </Button>
-              </Box>
-            ))}
-          </Box>)}
-
-        
+            <Box mt={4}>
+              <Typography variant="h5">Groups Found:</Typography>
+              {groups.map((group) => (
+                <Box key={group._id} mt={2} p={2} border="1px solid #ccc" borderRadius={4}>
+                  <Typography variant="subtitle1">{group.groupname}</Typography>
+                  <Typography>Course: {group.course}</Typography>
+                  <Typography>Date: {new Date(group.meetingDay).toLocaleDateString('en-US')}</Typography>
+                  <Typography>Time: {group.meetingTime}</Typography>
+                  <Typography>Location: {group.location}</Typography>
+                  <Typography>Description: {group.description}</Typography>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={() => addToGroup(group._id)} // Pass the group ID to addToGroup function
+                    mt={2}
+                  >
+                    Join Group
+                  </Button>
+                </Box>
+              ))}
+            </Box>
+          )}
         </div>
       ) : (
         <div style={{ marginTop: 40, textAlign: 'center' }}>

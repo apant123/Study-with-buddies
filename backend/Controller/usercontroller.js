@@ -134,7 +134,7 @@ const addGroup = async (req, res) => {
 
     if (mongoose.Types.ObjectId.isValid(userId)){// && mongoose.Types.ObjectId.isValid(eventId)) {
         db.collection('users')
-            .updateOne({_id: new ObjectId(userId)}, {$push: {myGroups: groupId}, $inc: { groupsCreated: 1 }})
+            .updateOne({_id: new ObjectId(userId)}, {$push: {myGroups: groupId}})
             .then(result =>{
                 res.status(200).json(result)
             })
@@ -212,6 +212,10 @@ const updateUser = async (req, res) => {
 
 const getUsersbyCourse = async (req, res) => {
     console.log("Function getUsersbyCourse called");
+    console.log("Here");
+    console.log("Here");
+    console.log("Here");
+    console.log(course);
     const { course } = req.body;
     console.log("Course received:", course);
   
