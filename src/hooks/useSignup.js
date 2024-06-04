@@ -31,13 +31,7 @@ export const useSignup = () => {
             return { error: json.error }; // Return the error for handling in the component
         }
 
-        if(!response.ok) {
-            setIsLoading(false)
-            //console.log(json.error)
-            setError(json.error)
-            return { error: json.error };
 
-        }
         if (response.ok) {
             // Save user to local storage
             localStorage.setItem('user', JSON.stringify(json));
