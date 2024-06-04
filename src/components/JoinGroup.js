@@ -124,7 +124,9 @@ function JoinGroup() {
                   <Button
                     variant="outlined"
                     color="primary"
-                    onClick={() => addToGroup(group._id)} // Pass the group ID to addToGroup function
+                    onClick={() => {
+                      addToGroup(group._id);
+                      navigate('/mygroups');}} // Pass the group ID to addToGroup function
                     mt={2}
                   >
                     Join Group
