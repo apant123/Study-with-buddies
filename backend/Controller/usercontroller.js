@@ -98,6 +98,7 @@ const getUserById = async (req, res) => {
     }
 };
 //added comment
+// added another comment
 const getUserGroups = async(req, res) => {
     const userId = req.params.id
 
