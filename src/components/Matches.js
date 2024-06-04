@@ -9,7 +9,7 @@ function Matches() {
   
   useEffect(() => {
     const fetchMatches = async () => {
-        const body = JSON.stringify({ sports: user.sports })
+        const body = JSON.stringify({ groups: user.groups })
         const response = await fetch('/api/user/getUsers', {
             method: 'POST', // or 'GET' depending on your server configuration
             headers: {
