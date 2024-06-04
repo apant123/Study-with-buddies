@@ -59,7 +59,7 @@ const [users, setUsers] = useState([]);
     <>
       {user ? (
         <div style={{ marginTop: 40, textAlign: 'center' }}>
-          <h2>Join a group by selecting your class below</h2>
+          <h2>Find study buddies selecting your class below</h2>
           <Stack direction="row" justifyContent="center" alignItems="center" spacing={5}>
             <FormControl sx={{ width: 1000 }}>
               <InputLabel id="demo-simple-select-label">Course</InputLabel>
@@ -90,7 +90,7 @@ const [users, setUsers] = useState([]);
                 }
               }}
             >
-              Find Group
+              Find Buddies
             </Button>
           </Stack>
           {users.length > 0 && (
@@ -111,7 +111,7 @@ const [users, setUsers] = useState([]);
                   //onClick={() => }
                   mt={2}
                 >
-                  View Group
+                  View Buddy
                 </Button>
               </Box>
             ))}
