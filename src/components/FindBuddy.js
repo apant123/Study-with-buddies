@@ -105,14 +105,6 @@ const [users, setUsers] = useState([]);
                 {/* <Typography>Courses: {user.courses}</Typography> */}
                 {/* <Typography>Groups: {user.myGroups}</Typography> */}
                 {/* <Typography>Description: {user.description}</Typography> */}
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  //onClick={() => }
-                  mt={2}
-                >
-                  View Buddy
-                </Button>
               </Box>
             ))}
           </Box>)}
