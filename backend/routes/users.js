@@ -37,6 +37,6 @@ route.get('/getUserByID/:id', getUserById);
 
 route.patch('/updateProfile/:id', updateProfile);
 
-route.post('/getUsers', getUsersbyCourse);
+route.get('/findbuddy', getUsersbyCourse);
 
 module.exports = route;

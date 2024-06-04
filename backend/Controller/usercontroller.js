@@ -203,6 +203,10 @@ const updateUser = async (req, res) => {
 
 
 const getUsersbyCourse = async (req, res) => {
+    console.log("Here");
+    console.log("Here");
+    console.log("Here");
+    console.log("Here");
     const { course } = req.body;
     console.log(course);
     try {

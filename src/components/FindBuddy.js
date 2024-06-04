@@ -144,12 +144,12 @@ const [users, setUsers] = useState([]);
       /*const response = await axios.post('/api/groups/search', { course }); // Adjust the endpoint as necessary
       const groups = response.data;
       */
-      const response = await fetch('/api/user/getUsers', {
+      const response = await fetch('/api/user/findbuddy', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ user }), // Sending course as a string
+        body: JSON.stringify({ course }), // Sending course as a string
       });
 
       console.log(response)
@@ -170,7 +170,7 @@ const [users, setUsers] = useState([]);
         // Navigate to the groups page or handle the group data as needed
         //navigate(`/${course}`); // Adjust this to your needs
       } else {
-        console.log(`No groups found for course "${course}".`);
+        console.log(`No users found for course "${course}".`);
         alert(`No groups found for course "${course}".`);
       }
     } catch (err) {
