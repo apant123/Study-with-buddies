@@ -110,7 +110,7 @@ function JoinGroup() {
                   //onClick={() => }
                   mt={2}
                 >
-                  View Group
+                  Join Group
                 </Button>
               </Box>
             ))}
