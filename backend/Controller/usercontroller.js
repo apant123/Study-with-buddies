@@ -66,6 +66,7 @@ const getAllUsers = async (req, res) => {
 
 
 const getUsers = async(req, res) => {
+    console.log("HEREHERERHERHRE");
     const { courses } = req.body
     try {
         const users = await User.findMatches(courses)
