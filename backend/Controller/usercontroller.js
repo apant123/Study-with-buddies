@@ -30,6 +30,7 @@ const loginUser = async (req, res) => {
     }
 }
 
+// test comment
 const signupUser = async (req, res) => {
     const { email, password, userName, fullName, courses } = req.body;
 
