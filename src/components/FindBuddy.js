@@ -1,145 +1,260 @@
-import React, { useState, useEffect } from 'react';
-import { ChakraProvider, Box, Table,Tbody, Tr, Td, Input, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button } from '@chakra-ui/react';
-import { useAuthContext } from '../hooks/useAuthContext';
-import { Link } from 'react-router-dom';
+// import React, { useState } from 'react';
+// import { Button, Stack, InputLabel, MenuItem, Select, FormControl, Typography, Box } from '@mui/material';
+// import { useNavigate } from 'react-router-dom';
+// import './styles.css';
+// import { useAuthContext } from "../hooks/useAuthContext";
+// import courseOptions from './courseOptions';
 
-function FindUsers() {
-  const [users, setUsers] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedUser, setSelectedUser] = useState(null);
-  const { user } = useAuthContext();
+// function FindBuddy() {
+//   const navigate = useNavigate();
+//   const { user } = useAuthContext();
+//   const [course, setCourse] = useState('');
+//   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await fetch('/api/user/getUsers'); // Adjust the endpoint to your needs
-      const json = await response.json();
+//   const handleChange = (event) => {
+//     setCourse(event.target.value);
+//   };
+// //
 
-      if (response.ok) {
-        setUsers(json);
-      }
-    };
+// const findUsers = async (course) => {
+//   try {
+//     const response = await fetch('/api/user/getUsers', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({ course }), // Sending course in the request body
+//     });
 
-    if (user) {
-      fetchUsers();
-    } else {
-      console.log("no user");
-    }
-  }, [user]);
+//     if (!response.ok) {
+//       throw new Error('Network response was not ok');
+//     }
 
-  const filteredUsers = users.filter((userD) => 
-    userD.fullName.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+//     const users = await response.json();
+//     console.log(users);
 
-  const handleUserClick = (user) => {
-    setSelectedUser(user);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedUser(null);
-  };
-
-  return (
-    <ChakraProvider>
-      <div style={{ textAlign: 'center', paddingTop: '15vh' }}>
-        <Link to="/findusermatch" style={{ textDecoration: 'none' }}>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{
-              background: 'linear-gradient(to right, #7dd3fc, #075985)',
-              color: 'white',
-              fontSize: '1.5em',
-              padding: '15px 15px',
-            }}
-          >
-            Find Buddy!
-          </Button>
-        </Link>
-      </div>
-      <Box
-        bgGradient="linear(to-b, #7dd3fc, #075985)"
-        className="home"
-        mt="20px"
-        paddingLeft="10px"
-        paddingRight="10px"
-        paddingTop="10px"
-      >
-        {/* Search Bar */}
-        <Input
-          bg="white"
-          type="text"
-          placeholder="Search by full name"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          mb={4}
-        />
-
-        <Table variant="simple" size="md">
-          <Tbody>
-            {filteredUsers.map((userD) => (
-              <Tr key={userD._id} onClick={() => handleUserClick(userD)}>
-                <Td fontSize="lg" fontWeight="bold">
-                  {userD.fullName}
-                </Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-
-        <Modal isOpen={selectedUser !== null} onClose={handleCloseModal}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>User Information</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              {selectedUser && (
-                <div>
-                  <p>Name: {selectedUser.fullName}</p>
-                  <p>Email: {selectedUser.email}</p>
-                  <p>Courses: {selectedUser.courses}</p>
-                </div>
-              )}
-            </ModalBody>
-            <ModalFooter>
-              <Button colorScheme="blue" onClick={handleCloseModal}>
-                Close
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </Box>
-    </ChakraProvider>
-  );
-}
-
-export default FindUsers;
+//     if (users.length > 0) {
+//       console.log(`Users found for course "${course}":`);
+//       users.forEach(user => {
+//         console.log(`- User: ${user.fullName}, Courses: ${user.courses}`);
+//       });
+//       setUsers(users);
+//     } else {
+//       console.log(`No users found for course "${course}".`);
+//       alert(`No users found for course "${course}".`);
+//     }
+//   } catch (err) {
+//     console.error('Error searching for users:', err.message);
+//     alert('Error searching for users. Please try again later.');
+//   }
+// };
 
 
-/*import React, { useState, useEffect } from 'react';
-import { Button } from '@mui/material';
+
+//   //
+//   return (
+//     <>
+//       {user ? (
+//         <div style={{ marginTop: 40, textAlign: 'center' }}>
+//           <h2>Find users by selecting your class below</h2>
+//           <Stack direction="row" justifyContent="center" alignItems="center" spacing={5}>
+//             <FormControl sx={{ width: 1000 }}>
+//               <InputLabel id="demo-simple-select-label">Course</InputLabel>
+//               <Select
+//                 labelId="demo-simple-select-label"
+//                 id="demo-simple-select"
+//                 value={course}
+//                 label="Course"
+//                 onChange={handleChange}
+//               >
+//                 {courseOptions.map((course) => (
+//                   <MenuItem key={course.value} value={course.label}>
+//                     {course.label}
+//                   </MenuItem>
+//                 ))}
+//               </Select>
+//             </FormControl>
+
+//             <Button
+//               variant="contained"
+//               color="primary"
+//               size="large"
+//               onClick={() => {
+//                 if (course) {
+//                   findUsers(course);
+//                 } else {
+//                   alert("Please select a course");
+//                 }
+//               }}
+//             >
+//               Find Users
+//             </Button>
+//           </Stack>
+//           {users.length > 0 && (
+//           <Box mt={4}>
+//             <Typography variant="h5">Users Found:</Typography>
+
+//             {users.map((user) => (
+//               <Box key={user._id} mt={2} p={2} border="1px solid #ccc" borderRadius={4}>
+//                 <Typography variant="subtitle1">{user.fullName}</Typography>
+//                 <Typography>Email: {user.email}</Typography>
+//               </Box>
+//             ))}
+//           </Box>)}
+
+        
+//         </div>
+//       ) : (
+//         <div style={{ marginTop: 40, textAlign: 'center' }}>
+//           <p style={{ fontSize: 30 }}>
+//             <b>You are not logged in. Please login to find buddies!</b>
+//           </p>
+//           <Button variant="contained" color="primary" size="large" onClick={() => navigate('/login')}>
+//             Login
+//           </Button>
+//         </div>
+//       )}
+//     </>
+//   );
+// }
+
+// export default FindBuddy;
+
+
+import React, { useState } from 'react';
+import { Button, Stack, InputLabel, MenuItem, Select, FormControl, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Import axios for making HTTP requests
 import './styles.css';
 import { useAuthContext } from "../hooks/useAuthContext";
+import courseOptions from './courseOptions';
 
 function FindBuddy() {
   const navigate = useNavigate();
-  const {user} = useAuthContext();
+  const { user } = useAuthContext();
+  const [course, setCourse] = useState('');
+const [users, setUsers] = useState([]);
+
+  const handleChange = (event) => {
+    setCourse(event.target.value);
+  };
+
+  const findUsers = async (course) => {
+    try {
+      /*const response = await axios.post('/api/groups/search', { course }); // Adjust the endpoint as necessary
+      const groups = response.data;
+      */
+      const response = await fetch('/api/user/getUsers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user }), // Sending course as a string
+      });
+
+      console.log(response)
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const users = await response.json();
+      console.log(users)
+
+      if (users.length > 0) {
+        console.log(`Users found for course "${course}":`);
+        users.forEach(user => {
+          console.log(`- Group: ${user.name}, Course: ${user.course}`);
+        });
+        setUsers(users)
+        // Navigate to the groups page or handle the group data as needed
+        //navigate(`/${course}`); // Adjust this to your needs
+      } else {
+        console.log(`No groups found for course "${course}".`);
+        alert(`No groups found for course "${course}".`);
+      }
+    } catch (err) {
+      console.error('Error searching for groups:', err.message);
+      alert('Error searching for groups. Please try again later.');
+    }
+  };
 
   return (
     <>
-        {user ? 
-          <p>You are logged in.</p> 
-        : 
+      {user ? (
         <div style={{ marginTop: 40, textAlign: 'center' }}>
-          <p style={{fontSize: 30}}><b>You are not logged in. Please login to find study buddies!</b></p>
+          <h2>Join a group by selecting your class below</h2>
+          <Stack direction="row" justifyContent="center" alignItems="center" spacing={5}>
+            <FormControl sx={{ width: 1000 }}>
+              <InputLabel id="demo-simple-select-label">Course</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={course}
+                label="Course"
+                onChange={handleChange}
+              >
+                {courseOptions.map((course) => (
+                  <MenuItem key={course.value} value={course.label}>
+                    {course.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={() => {
+                if (course) {
+                  findUsers(course);
+                } else {
+                  alert("Please select a course");
+                }
+              }}
+            >
+              Find Group
+            </Button>
+          </Stack>
+          {users.length > 0 && (
+          <Box mt={4}>
+            <Typography variant="h5">Users Found:</Typography>
+
+            {users.map((user) => (
+              <Box key={user._id} mt={2} p={2} border="1px solid #ccc" borderRadius={4}>
+                <Typography variant="subtitle1">{user.email}</Typography>
+                <Typography>Name: {user.fullName}</Typography>
+                <Typography>Username: {user.userName}</Typography>
+                {/* <Typography>Courses: {user.courses}</Typography> */}
+                {/* <Typography>Groups: {user.myGroups}</Typography> */}
+                {/* <Typography>Description: {user.description}</Typography> */}
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  //onClick={() => }
+                  mt={2}
+                >
+                  View Group
+                </Button>
+              </Box>
+            ))}
+          </Box>)}
+
+        
+        </div>
+      ) : (
+        <div style={{ marginTop: 40, textAlign: 'center' }}>
+          <p style={{ fontSize: 30 }}>
+            <b>You are not logged in. Please login to join study groups!</b>
+          </p>
           <Button variant="contained" color="primary" size="large" onClick={() => navigate('/login')}>
             Login
           </Button>
         </div>
-        }
+      )}
     </>
   );
 }
 
 export default FindBuddy;
-*/

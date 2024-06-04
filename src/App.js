@@ -5,7 +5,7 @@ import Nav from './components/Nav.js';
 import Home from './components/Home.js';
 import Profile from './components/Profile.js';
 import CreateGroup from './components/CreateGroup.js';
-import searchGroups from './components/CreateGroup.js';
+//import searchGroups from './components/CreateGroup.js';
 import JoinGroup from './components/JoinGroup.js';
 import FindBuddy from './components/FindBuddy.js';
 import Login from './components/Login.js';

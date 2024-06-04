@@ -5,6 +5,7 @@ const Groups = require('../models/groupModel')
 const jwt = require('jsonwebtoken')
 const { db } = require('../models/userModel')
 const { useInRouterContext } = require('react-router-dom')
+const { useResetProjection } = require('framer-motion')
 
 const createToken = (_id) => {
     return jwt.sign({_id}, "aravpant", {expiresIn: '3d' })
@@ -200,6 +201,29 @@ const updateUser = async (req, res) => {
 }
 
 
+
+const getUsersbyCourse = async (req, res) => {
+    const { course } = req.body;
+    console.log(course);
+    try {
+      const users = await User.find({ courses: { $in: [course] } });
+      if (users.length > 0) {
+        console.log(`Users found for course "${course}":`);
+        users.forEach(user => {
+          console.log(`- User: ${user.fullName}, Courses: ${user.courses}`);
+        });
+      } else {
+        console.log(`No users found for this course "${course}".`);
+      }
+      res.status(200).json(users);
+    } catch (err) {
+      console.error('Error searching for users:', err.message);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+  
+
+
 module.exports = { 
     loginUser, 
     signupUser, 
@@ -210,5 +234,7 @@ module.exports = {
     getAllUsers,
     getUserById,
     updateProfile,
-    removeGroup
+    removeGroup,
+    getUsersbyCourse
+    
 }
