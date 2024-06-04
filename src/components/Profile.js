@@ -15,7 +15,7 @@ function Profile() {
   const userId = localStorage.getItem('userId');
   const {logout} = useLogout();
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
+  const [userName, setUsername] = useState('');
   const [fullName, setName] = useState('');
   const [courses, setCourses] = useState([]);
   const [transformedCourses, setTCourses] = useState([]);
@@ -41,7 +41,7 @@ function Profile() {
         setCourses(json.courses);
         setName(json.fullName);
         setEmail(json.email);
-        setUsername(json.username);
+        setUsername(json.userName);
       }
     };
 
@@ -60,7 +60,7 @@ function Profile() {
     if (courses.length < 3) {
       validationErrors.push('Please choose at least three courses.');
     }
-    if (username.length < 5) {
+    if (userName.length < 5) {
       validationErrors.push('Username must be at least 5 characters.');
     }
 
@@ -72,7 +72,7 @@ function Profile() {
     try {
       const response = await fetch(`/api/user/updateProfile/${userId}`, {
         method: 'PATCH',
-        body: JSON.stringify({ fullName, courses, email, username }),
+        body: JSON.stringify({ fullName, courses, email, userName }),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -115,7 +115,7 @@ function Profile() {
               <Input
                 type="text"
                 name="username"
-                value={username}
+                value={userName}
                 onChange={(e) => setUsername(e.target.value)}
                 fontSize="lg"
               />
