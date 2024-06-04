@@ -9,7 +9,7 @@ function Matches() {
   
   useEffect(() => {
     const fetchMatches = async () => {
-        const body = JSON.stringify({ courses: user.courses })
+        const body = JSON.stringify({ sports: user.sports })
         const response = await fetch('/api/user/getUsers', {
             method: 'POST', // or 'GET' depending on your server configuration
             headers: {
@@ -46,7 +46,7 @@ function Matches() {
                   {userD.fullName}
                 </Text>
                 <Text>
-                  Email: {userD.email}
+                  Age: {userD.age}
                 </Text>
               </Box>
             ))}
@@ -57,4 +57,3 @@ function Matches() {
 }
 
 export default Matches;
-

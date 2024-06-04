@@ -13,7 +13,8 @@ const {
   getAllUsers,
   getUserById,
   updateProfile,
-  removeGroup
+  removeGroup,
+  getUsersbyCourse
 } = require('../Controller/usercontroller');
 
 route.post('/login', loginUser);
@@ -35,5 +36,7 @@ route.get('/getAllUsers', getAllUsers);
 route.get('/getUserByID/:id', getUserById);
 
 route.patch('/updateProfile/:id', updateProfile);
+
+route.post('/getUsers', getUsersbyCourse);
 
 module.exports = route;

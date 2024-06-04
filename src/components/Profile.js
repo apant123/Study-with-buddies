@@ -41,7 +41,7 @@ function Profile() {
         setCourses(json.courses);
         setName(json.fullName);
         setEmail(json.email);
-        setUsername(json.userName);
+        setUsername(json.username);
       }
     };
 
