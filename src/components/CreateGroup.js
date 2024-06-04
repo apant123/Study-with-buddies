@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import { Stack, Button, Select, TextField, Typography, MenuItem } from '@mui/material';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useAuthContext } from "../hooks/useAuthContext";
+import './DatePickerStyle.css';
 
 const CreateGroup = () => {
   const [groupname, setGroupName] = useState(''); // Group name
@@ -187,7 +188,7 @@ const CreateGroup = () => {
             labelId="course-select-label"
             value={course}
             onChange={(course) => {setCourse(course.target.value)}}
-            sx={{width:"50ch"}}
+            sx={{width:"57ch"}}
           >
             {courseOptions.map((item) => (
               <MenuItem key={item.value} value={item.value}>
@@ -205,6 +206,8 @@ const CreateGroup = () => {
             onChange={(date) => setMeetingDay(date)}
             dateFormat="MM/dd/yyyy"
             minDate={new Date()}
+            className="custom-date-picker"
+            popperClassName="custom-popper"
           />
         </Stack>
 
@@ -235,13 +238,15 @@ const CreateGroup = () => {
         <Stack direction="column">
           <Typography><b>Time</b></Typography>
           <DatePicker
-            id="eventTime"
+            id="meetingTime"
             selected={meetingTime ? new Date(meetingTime) : null}
             onChange={(time) => setMeetingTime(time)}
             showTimeSelect
             showTimeSelectOnly
             timeIntervals={15}
             dateFormat="h:mm aa"
+            className="custom-time-picker"
+            popperClassName="custom-popper"
           />  
         </Stack>
       </Stack>

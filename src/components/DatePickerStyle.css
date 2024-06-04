@@ -1,0 +1,60 @@
+.date-picker-wrapper {
+    width: 50ch; /* Adjust the width as needed */
+}
+
+.custom-date-picker {
+    width: 100%;
+    height: 40px; /* Adjust the height as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+    padding: 10px; /* Adjust the padding as needed */
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.custom-popper .react-datepicker {
+    font-size: 16px; /* Adjust the font size of the calendar */
+}
+
+.custom-popper .react-datepicker__day,
+.custom-popper .react-datepicker__day-name {
+    width: 2.5rem; /* Adjust the size of the day cells */
+    height: 2.5rem; /* Adjust the size of the day cells */
+    line-height: 2.5rem; /* Adjust the line height of the day cells */
+}
+
+.time-picker-wrapper {
+    /* Set the size of the container */
+    width: 50ch; /* Adjust the width as needed */
+  }
+  
+.custom-time-picker {
+    /* Set the size of the input */
+    width: 100%;
+    height: 40px; /* Adjust the height as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+    padding: 10px; /* Adjust the padding as needed */
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.custom-popper .react-datepicker {
+    /* Set the size of the date picker popper */
+    font-size: 16px; /* Adjust the font size of the time picker */
+}
+
+.custom-popper .react-datepicker__time-container {
+    width: auto; /* Adjust the width of the time container */
+}
+
+.custom-popper .react-datepicker__time {
+    width: 100%; /* Adjust the width of the time container */
+}
+
+.custom-popper .react-datepicker__time-box {
+    width: 100%; /* Adjust the width of the time box */
+}
+
+.custom-popper .react-datepicker__time-list-item {
+    height: 2.5rem; /* Adjust the height of the time cells */
+    line-height: 2.5rem; /* Adjust the line height of the time cells */
+}
