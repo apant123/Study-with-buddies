@@ -60,9 +60,9 @@ const signupUser = async (req, res) => {
 
         // Respond with token and non-sensitive user data
         res.status(200).json({ email, token });
-    } catch (error) {
-        console.log("some kind of error occurred", error);
-        res.status(400).json({ error: "An error occurred during signup" });
+   } catch (error) {
+        //res.status(400).json({ error: "some kind of error occured" });
+        res.status(400).json({error: error.message})
     }
 }
 

@@ -81,6 +81,16 @@ function Signup() {
     } else {
       navigate('/login');
     }
+    //If no validation errors, proceed with signup
+
+    const response = await signup(email, password, userName, fullName, courses);
+    if (response && response.error) {
+      alert(response.error); // Show alert if there is an error from the server
+    } else {
+      navigate('/login');
+    }
+    
+
   };
 
   return (
