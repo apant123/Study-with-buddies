@@ -55,7 +55,7 @@ const signupUser = async (req, res) => {
         res.status(200).json({ email, token });
    } catch (error) {
         //res.status(400).json({ error: "some kind of error occured" });
-        console.log("some kind of error occured");
+        res.status(400).json({error: error.message})
     }
     
 }

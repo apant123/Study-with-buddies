@@ -77,7 +77,8 @@ userSchema.statics.signup = async function(email, password, userName, fullName, 
     
     const alreadyExists = await this.findOne({ email })
     if (alreadyExists) {
-        console.log('Email already exists')
+        //console.log("Email already exists")
+        throw Error('Email already exists')
     }
     // hashing password
     const uniquify = await bcrypt.genSalt(10)

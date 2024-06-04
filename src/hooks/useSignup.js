@@ -24,7 +24,10 @@ import { useAuthContext } from "./useAuthContext"
 
         if(!response.ok) {
             setIsLoading(false)
+            //console.log(json.error)
             setError(json.error)
+            return { error: json.error };
+
         }
         if (response.ok) {
             // savc user to local storage
