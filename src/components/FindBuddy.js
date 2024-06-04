@@ -15,7 +15,7 @@ const [users, setUsers] = useState([]);
     setCourse(event.target.value);
   };
 
-  const findUsers = async (courses) => {
+  const findUsers = async (course) => {
     try {
       /*const response = await axios.post('/api/groups/search', { course }); // Adjust the endpoint as necessary
       const groups = response.data;
@@ -25,7 +25,7 @@ const [users, setUsers] = useState([]);
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ courses }), // Sending course as a string
+        body: JSON.stringify({ course }), // Sending course as a string
       });
 
       console.log(response)

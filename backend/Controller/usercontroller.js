@@ -204,12 +204,10 @@ const updateUser = async (req, res) => {
 
 
 const getUsersbyCourse = async (req, res) => {
-    console.log("Here");
-    console.log("Here");
-    console.log("Here");
-    console.log("Here");
+    console.log("Function getUsersbyCourse called");
     const { course } = req.body;
-    console.log(course);
+    console.log("Course received:", course);
+  
     try {
       const users = await User.find({ courses: { $in: [course] } });
       if (users.length > 0) {
@@ -226,6 +224,7 @@ const getUsersbyCourse = async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   };
+  
   
 
 
