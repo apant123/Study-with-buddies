@@ -98,7 +98,8 @@ const getUserById = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
-
+//added comment
+// added another comment
 const getUserGroups = async(req, res) => {
     const userId = req.params.id
 
