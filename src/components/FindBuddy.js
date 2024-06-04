@@ -99,11 +99,11 @@ const [users, setUsers] = useState([]);
 
             {users.map((user) => (
               <Box key={user._id} mt={2} p={2} border="1px solid #ccc" borderRadius={4}>
-                <Typography variant="subtitle1">{user.email}</Typography>
-                <Typography>Name: {user.fullName}</Typography>
+                <Typography variant="subtitle1">{user.fullName}</Typography>
                 <Typography>Username: {user.userName}</Typography>
+                <Typography>Email: {user.email}</Typography>
                 {/* <Typography>Courses: {user.courses}</Typography> */}
-                {/* <Typography>Groups: {user.myGroups}</Typography> */}
+                {/*<Typography>Groups: {user.myGroups}</Typography> */}
                 {/* <Typography>Description: {user.description}</Typography> */}
               </Box>
             ))}
