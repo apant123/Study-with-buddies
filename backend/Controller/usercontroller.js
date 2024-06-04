@@ -100,6 +100,7 @@ const getUserById = async (req, res) => {
 //added comment
 //added another comment
 // another test
+//Arav3
 const getUserGroups = async(req, res) => {
     const userId = req.params.id
 
