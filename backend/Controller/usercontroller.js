@@ -66,6 +66,7 @@ const getAllUsers = async (req, res) => {
 
 
 const getUsers = async(req, res) => {
+    console.log("HEREHERERHERHRE");
     const { courses } = req.body
     try {
         const users = await User.findMatches(courses)
@@ -133,7 +134,7 @@ const addGroup = async (req, res) => {
 
     if (mongoose.Types.ObjectId.isValid(userId)){// && mongoose.Types.ObjectId.isValid(eventId)) {
         db.collection('users')
-            .updateOne({_id: new ObjectId(userId)}, {$push: {myGroups: groupId}, $inc: { groupsCreated: 1 }})
+            .updateOne({_id: new ObjectId(userId)}, {$push: {myGroups: groupId}})
             .then(result =>{
                 res.status(200).json(result)
             })
@@ -147,22 +148,29 @@ const addGroup = async (req, res) => {
 
 // add an event to a user's myEvents
 const removeGroup = async (req, res) => {
-    const userId = req.params.id
-    const groupId = req.body.myGroups; // Assuming you send the event ID in the request body
-
-    if (mongoose.Types.ObjectId.isValid(userId)){// && mongoose.Types.ObjectId.isValid(eventId)) {
-        db.collection('users')
-            .updateOne({_id: new ObjectId(userId)}, {$pull: {myGroups: groupId}, $inc: { groupsCreated: -1 }})
-            .then(result =>{
-                res.status(200).json(result)
-            })
-            .catch(err =>{
-                res.status(500).json({error: 'Could not update the document'})
-            })
+    const userId = req.params.id;
+    const groupId = req.body.myGroups; // Assuming you send the group ID in the request body
+  
+    if (mongoose.Types.ObjectId.isValid(userId) && mongoose.Types.ObjectId.isValid(groupId)) {
+      try {
+        const result = await db.collection('users').updateOne(
+          { _id: new ObjectId(userId) },
+          { $pull: { myGroups: groupId }, $inc: { groupsCreated: -1 } }
+        );
+  
+        if (result.modifiedCount === 0) {
+          return res.status(404).json({ error: 'User or group not found' });
+        }
+  
+        res.status(200).json(result);
+      } catch (err) {
+        res.status(500).json({ error: 'Could not update the document' });
+      }
     } else {
-        res.status(400).json({ error: 'Invalid user or group ID' });
+      res.status(400).json({ error: 'Invalid user or group ID' });
     }
-};
+  };
+  
 
 
 // add an event to a user's myEvents
@@ -203,8 +211,14 @@ const updateUser = async (req, res) => {
 
 
 const getUsersbyCourse = async (req, res) => {
-    const { course } = req.body;
+    console.log("Function getUsersbyCourse called");
+    console.log("Here");
+    console.log("Here");
+    console.log("Here");
     console.log(course);
+    const { course } = req.body;
+    console.log("Course received:", course);
+  
     try {
       const users = await User.find({ courses: { $in: [course] } });
       if (users.length > 0) {
@@ -221,6 +235,7 @@ const getUsersbyCourse = async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   };
+  
   
 
 

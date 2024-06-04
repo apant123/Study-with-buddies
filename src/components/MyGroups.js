@@ -15,13 +15,14 @@ function MyGroups() {
       console.log(JSON.stringify(jsonId));
       console.log(userId);
 
-      const response2 = await fetch(`/api/user/removeGroups/${userId}`, {
+      const response2 = await fetch(`/api/user/removeGroup/${userId}`, {
         method: 'PATCH',
         body: JSON.stringify(jsonId),
         headers: {
           'Content-Type': 'application/json',
         },
       });
+      
 
       if (!response2.ok) {
         throw new Error('Network response was not ok');
