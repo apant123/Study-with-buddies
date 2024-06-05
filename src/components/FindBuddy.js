@@ -114,7 +114,7 @@ const [users, setUsers] = useState([]);
       ) : (
         <div style={{ marginTop: 40, textAlign: 'center' }}>
           <p style={{ fontSize: 30 }}>
-            <b>You are not logged in. Please login to join study groups!</b>
+            <b>You are not logged in. Please login to find buddies!</b>
           </p>
           <Button variant="contained" color="primary" size="large" onClick={() => navigate('/login')}>
             Login
