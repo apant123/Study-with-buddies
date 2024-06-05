@@ -40,18 +40,18 @@ const [users, setUsers] = useState([]);
       if (users.length > 0) {
         console.log(`Users found for course "${course}":`);
         users.forEach(user => {
-          console.log(`- Group: ${user.name}, Course: ${user.course}`);
+          console.log(`- User: ${user.name}, Course: ${user.course}`);
         });
         setUsers(users)
         // Navigate to the groups page or handle the group data as needed
         //navigate(`/${course}`); // Adjust this to your needs
       } else {
         console.log(`No users found for course "${course}".`);
-        alert(`No groups found for course "${course}".`);
+        alert(`No users found for course "${course}".`);
       }
     } catch (err) {
-      console.error('Error searching for groups:', err.message);
-      alert('Error searching for groups. Please try again later.');
+      console.error('Error searching for users:', err.message);
+      alert('Error searching for users. Please try again later.');
     }
   };
 
