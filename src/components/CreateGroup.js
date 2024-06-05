@@ -258,16 +258,15 @@ const CreateGroup = () => {
       {user ?
       <div>
         <h1>Create a group</h1>
-        
-            <Stack maxWidth={true} direction="column" spacing={6} sx={{justifyContent:"center", alignItems:"center", display:"flex"}}>
-                {renderForm()}
-                {error && (
-                <p style={{ color: 'red', marginTop: '10px' }}>
-                    Error: {error}
-                </p>
-                )}
-                {renderEndButtons()}
-            </Stack>
+          <Stack maxWidth={true} direction="column" spacing={6} sx={{justifyContent:"center", alignItems:"center", display:"flex"}}>
+              {renderForm()}
+              {error && (
+              <p style={{ color: 'red', marginTop: '10px' }}>
+                  Error: {error}
+              </p>
+              )}
+              {renderEndButtons()}
+          </Stack>
       </div>
       :
       <div style={{ marginTop: 40, textAlign: 'center' }}>

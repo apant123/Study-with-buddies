@@ -76,7 +76,7 @@ function JoinGroup() {
     <>
       {user ? (
         <div style={{ marginTop: 40, textAlign: 'center' }}>
-          <h2>Join a group by selecting your class below</h2>
+          <h1>Join a group by selecting your class below</h1>
           <Stack direction="row" justifyContent="center" alignItems="center" spacing={5}>
             <FormControl sx={{ width: 1000 }}>
               <InputLabel id="demo-simple-select-label">Course</InputLabel>
@@ -112,22 +112,22 @@ function JoinGroup() {
           </Stack>
           {groups.length > 0 && (
             <Box mt={4}>
-              <Typography variant="h5">Groups Found:</Typography>
+              <Typography variant="h5"><b>Groups Found:</b></Typography>
               {groups.map((group) => (
                 <Box key={group._id} mt={2} p={2} border="1px solid #ccc" borderRadius={4}>
-                  <Typography variant="subtitle1">{group.groupname}</Typography>
-                  <Typography>Course: {group.course}</Typography>
-                  <Typography>Date: {new Date(group.meetingDay).toLocaleDateString('en-US')}</Typography>
-                  <Typography>Time: {group.meetingTime}</Typography>
-                  <Typography>Location: {group.location}</Typography>
-                  <Typography>Description: {group.description}</Typography>
+                  <Typography variant="subtitle1"><b>{group.groupname}</b></Typography>
+                  <Typography><em>Course:</em> {group.course}</Typography>
+                  <Typography><em>Date:</em> {new Date(group.meetingDay).toLocaleDateString('en-US')}</Typography>
+                  <Typography><em>Time:</em> {group.meetingTime}</Typography>
+                  <Typography><em>Location:</em> {group.location}</Typography>
+                  <Typography><em>Description:</em> {group.description}</Typography>
                   <Button
-                    variant="outlined"
+                    variant="contained"
                     color="primary"
                     onClick={() => {
                       addToGroup(group._id);
                       navigate('/mygroups');}} // Pass the group ID to addToGroup function
-                    mt={2}
+                    sx={{marginTop:"5px"}}
                   >
                     Join Group
                   </Button>

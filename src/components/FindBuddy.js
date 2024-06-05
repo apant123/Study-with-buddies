@@ -59,7 +59,7 @@ const [users, setUsers] = useState([]);
     <>
       {user ? (
         <div style={{ marginTop: 40, textAlign: 'center' }}>
-          <h2>Find study buddies by selecting your class below</h2>
+          <h1>Find study buddies by selecting your class below</h1>
           <Stack direction="row" justifyContent="center" alignItems="center" spacing={5}>
             <FormControl sx={{ width: 1000 }}>
               <InputLabel id="demo-simple-select-label">Course</InputLabel>

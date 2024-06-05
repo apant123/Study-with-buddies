@@ -58,6 +58,7 @@ function MyGroups() {
 
   return (
     <>
+    <h1>My Groups</h1>
     {user ?
       <Box bg="white" className="home" mt="50px" ml={4} mr={4} style={{ zIndex: 1 }}>
         <Box
