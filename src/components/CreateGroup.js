@@ -2,26 +2,13 @@ import courseOptions from './courseOptions';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
-import { useParams } from 'react-router-dom';
-import Select from 'react-select';
+import { Stack, Button, Select, TextField, Typography, MenuItem } from '@mui/material';
 import 'react-datepicker/dist/react-datepicker.css';
-import {
-  Container,
-  Stack,
-  Heading,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Divider,
-  Flex,
-} from '@chakra-ui/react';
-import { ChakraProvider } from '@chakra-ui/react';
 import { useAuthContext } from "../hooks/useAuthContext";
+import './DatePickerStyle.css';
 
 const CreateGroup = () => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [groupname, setGroupName] = useState(''); // Group Name
+  const [groupname, setGroupName] = useState(''); // Group name
   const [course, setCourse] = useState(''); // Course that group belongs to
   const [meetingDay, setMeetingDay] = useState(null); // Day group meets
   const [description, setDescription] = useState(''); // Group Description
@@ -31,71 +18,41 @@ const CreateGroup = () => {
   const [location, setLocation] = useState('');  // Meeting Location
   const [meetingTime, setMeetingTime] = useState(null);  // Meeting time
   const {user} = useAuthContext();
-
   const navigate = useNavigate();
-
-  function arrayToString(arr, separator = ', ') {
-    if (!Array.isArray(arr)) {
-      return String(arr); // If it's not an array, convert to a string
-    }
-    return arr.join(separator);
-  }
 
   const handleNextQuestion = () => {
     setError(null);
 
-    // Check for errors based on the current question
-    switch (currentQuestion) {
-      case 0:
-        if (groupname.length <= 4) {
-          setError('Group name must be at least 5 characters.');
-          return;
-        }
-        break;
-      case 1:
-        if (course.length === 0) {
-          setError('Please choose at least one course.');
-          return;
-        }
-        break;
-      case 2:
-        if (meetingDay == null) {
-          setError('Please enter a day');
-          return;
-        }
-        break;
-      case 3:
-        if (description.length <= 9) {
-          setError('Description must be at least 10 characters.');
-          return;
-        }
-        break;
-
-      case 4:
-        if (location.length === 0) {
-          setError('Please enter a location.');
-          return;
-        }
-        break;
-
-      case 5:
-        if (meetingTime == null) {
-          setError('Please enter a time.');
-          return;
-        }
-        break;
-
-      default:
-        break;
+    if (groupname.length <= 4) {
+        setError('Group name must be at least 5 characters.');
+        return false;
+    } else if (course.length === 0) {
+        setError('Please choose at least one course.');
+        return false;
+    } else if (meetingDay == null) {
+        setError('Please enter a day');
+        return false;
+    } else if (description.length <= 9) {
+        setError('Description must be at least 10 characters.');
+        return false;
+    } else if (location.length === 0) {
+        setError('Please enter a location.');
+        return false;
+    } else if (meetingTime == null) {
+        setError('Please enter a time.');
+        return false;
+    } else if (description.length < 10) {
+        setError('Description must be at least 10 characters.');
+        return false;
     }
 
-    setCurrentQuestion(currentQuestion + 1);
+    return true;
   };
 
   const handleCreateGroup = async (e) => {
     setError(null);
     e.preventDefault();
-    // Perform action to create the event using the provided data
+
     console.log({ groupname, course, meetingDay, description, location, meetingTime})
 
     const newGroup = {
@@ -152,32 +109,23 @@ const CreateGroup = () => {
   };
 
   const handleCreateAnotherGroup = () => {
-    // Reset state variables to start a new event creation
     setGroupName('');
     setCourse('');
     setMeetingDay('');
     setDescription('');
-    setCurrentQuestion(0);
     setIsSubmitted(false);
+    setLocation('');
+    setMeetingTime(null);
   };
 
-  const isValidAnswerToQuestion6 = () => {
-    if (description.length >= 10) {
-      return true;
-    }
-    setError('Description must be at least 10 characters.');
-    return false;
-  };
-
-  const renderButtons = () => {
+  const renderEndButtons = () => {
     if (isSubmitted) {
       return (
         <Stack spacing={4} direction="row">
           <Button
-            variant="primary"
-            style={{
-              background: '#075985',
-              color: 'white',
+            variant="contained"
+            color="primary"
+            sx={{
               margin: '10px',
             }}
             onClick={() => navigate('/mygroups')}
@@ -185,10 +133,9 @@ const CreateGroup = () => {
             Back to My Groups
           </Button>
           <Button
-            variant="primary"
-            style={{
-              background: '#075985',
-              color: 'white',
+            variant="contained"
+            color="primary"
+            sx={{
               margin: '10px',
             }}
             onClick={handleCreateAnotherGroup}
@@ -201,239 +148,139 @@ const CreateGroup = () => {
 
     return (
       <Button
-        variant="primary"
-        style={{
-          background: '#075985',
-          color: 'white',
-          margin: '10px',
+        variant="contained"
+        color="primary"
+        sx={{
+          width:"25ch",
+          justifyContent:"center", textAlign:"center", alignItems:"center"
         }}
         onClick={(e) => {
-          if (currentQuestion < 6) {
-            handleNextQuestion();
-          } else if (currentQuestion === 6 && isValidAnswerToQuestion6()) {
-            handleCreateGroup(e);
-          }
+            if (handleNextQuestion()) {
+                handleCreateGroup(e);
+            }
         }}
       >
-        {currentQuestion < 6 ? 'Next Question' : 'Submit'}
+        Submit Group
       </Button>
     );
   };
 
-  const renderCurrentQuestion = () => {
+  const renderForm = () => {
     if (isSubmitted) {
       return <p>Congratulations! Your group has been created!</p>;
     }
 
-    switch (currentQuestion) {
-      case 0:
-        return (
-          <FormControl>
-            <FormLabel htmlFor="title">Group Name</FormLabel>
-            <Input
-              id="groupname"
-              type="text"
-              value={groupname}
-              onChange={(e) => setGroupName(e.target.value)}
-            />
-          </FormControl>
-        );
-      case 1:
-        return (
-          <FormControl>
-            <FormLabel htmlFor="course">Choose a Course</FormLabel>
-            {console.log('Options:', courseOptions)}
-            <Select
-              id="courses"
-              options={courseOptions}
-              isMulti
-              onChange={(selectedOptions) =>
-                setCourse(
-                  arrayToString(
-                    selectedOptions.map((option) => option.label)
-                  )
-                )
-              }
-            ></Select>
-          </FormControl>
-        );
-      case 2:
-        return (
-          <FormControl>
-            <FormLabel htmlFor="meetingDay">Meeting Day</FormLabel>
-            <DatePicker
-              id="meetingDay"
-              selected={meetingDay ? new Date(meetingDay) : null}
-              onChange={(date) => setMeetingDay(date)}
-              dateFormat="MM/dd/yyyy"
-              minDate={new Date()} // Optional: Set the minimum date to today
-              // You can customize the DatePicker further based on your needs
-            />
-          </FormControl>
-        );
-      case 3:
-        return (
-          <FormControl>
-            <FormLabel htmlFor="description">Description</FormLabel>
-            <Input
-              id="description"
-              type="text"
-              value={description}
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
-            />
-          </FormControl>
-        );
-      case 4:
-        return (
-          <FormControl>
-            <FormLabel htmlFor="location">Location</FormLabel>
-            <Input
-              id="location"
-              type="text"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-            />
-          </FormControl>
-      );
+    return (
+      <Stack direction="column" spacing={3} sx={{justifyContent:"center", alignText:"center", alignItems:"center"}}>
+        <Stack direction="column">
+          <Typography><b>Group Name</b></Typography>
+          <TextField
+            id="groupname"
+            value={groupname}
+            onChange={(e) => setGroupName(e.target.value)}
+            sx={{width:"50ch"}}
+          />
+        </Stack>
+        
+        <Stack direction="column">
+          <Typography><b>Course</b></Typography>
+          <Select
+            labelId="course-select-label"
+            value={course}
+            onChange={(course) => {setCourse(course.target.value)}}
+            sx={{width:"57ch"}}
+          >
+            {courseOptions.map((item) => (
+              <MenuItem key={item.value} value={item.value}>
+                {item.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </Stack>
+        
+        <Stack direction="column" sx={{width:"50ch"}}>
+          <Typography><b>Meeting Day</b></Typography>
+          <DatePicker
+            id="meetingDate"
+            selected={meetingDay ? new Date(meetingDay) : null}
+            onChange={(date) => setMeetingDay(date)}
+            dateFormat="MM/dd/yyyy"
+            minDate={new Date()}
+            className="custom-date-picker"
+            popperClassName="custom-popper"
+          />
+        </Stack>
 
-      case 5:
-  return (
-    <FormControl>
-      <FormLabel htmlFor="meetingTime">Time</FormLabel>
-      <DatePicker
-        id="meetingTime"
-        selected={meetingTime ? new Date(meetingTime) : null}
-        onChange={(time) => setMeetingTime(time)}
-        showTimeSelect
-        showTimeSelectOnly
-        timeIntervals={15}
-        dateFormat="h:mm aa"
-      />
-    </FormControl>
-  );
-      default:
-        return null;
-    }
-  };
+        <Stack direction="column">
+          <Typography><b>Description</b></Typography>
+          <TextField
+            id="description"
+            type="text"
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+            sx={{width:"50ch"}}
+          />
+        </Stack>
+
+        <Stack direction="column"> 
+          <Typography><b>Location</b></Typography>
+          <TextField
+            id="location"
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            sx={{width:"50ch"}}
+          />
+        </Stack>
+        
+        <Stack direction="column">
+          <Typography><b>Time</b></Typography>
+          <DatePicker
+            id="meetingTime"
+            selected={meetingTime ? new Date(meetingTime) : null}
+            onChange={(time) => setMeetingTime(time)}
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={15}
+            dateFormat="h:mm aa"
+            className="custom-time-picker"
+            popperClassName="custom-popper"
+          />  
+        </Stack>
+      </Stack>
+    );
+};
 
   return (
     <>
-    {user ?
-    <ChakraProvider>
-      <Container
-        maxW="lg"
-        py={{
-          base: '12',
-          md: '24',
-        }}
-        px={{
-          base: '0',
-          sm: '8',
-        }}
-      >
-        <Stack spacing="8">
-          <Flex
-            direction="column"
-            align="center"
-          >
-            <Heading
-              size={{
-                base: 'xs',
-                md: 'lg',
-              }}
-              style={{
-                textAlign: 'center',
-                padding: '0px',
-              }}
-            >
-              Create a new group
-            </Heading>
-            <Divider />
-          </Flex>
-          <Stack
-            py={{
-              base: '0',
-              sm: '8',
-            }}
-            px={{
-              base: '4',
-              sm: '10',
-            }}
-            bg={{
-              base: 'transparent',
-              sm: 'bg-surface',
-            }}
-            boxShadow={{
-              base: 'none',
-              sm: 'md',
-            }}
-            borderRadius={{
-              base: 'none',
-              sm: 'xl',
-            }}
-          >
-            <Stack spacing="6">
-              {renderCurrentQuestion()}
-              <Divider />
-              <Stack spacing="6">
+      {user ?
+      <div>
+        <h1>Create a group</h1>
+        
+            <Stack maxWidth={true} direction="column" spacing={6} sx={{justifyContent:"center", alignItems:"center", display:"flex"}}>
+                {renderForm()}
                 {error && (
-                  <p style={{ color: 'red', marginTop: '10px' }}>
+                <p style={{ color: 'red', marginTop: '10px' }}>
                     Error: {error}
-                  </p>
+                </p>
                 )}
-                {renderButtons()}
-              </Stack>
+                {renderEndButtons()}
             </Stack>
-          </Stack>
-        </Stack>
-      </Container>
-    </ChakraProvider>
-    :
-    <div style={{ marginTop: 40, textAlign: 'center' }}>
-      <p style={{fontSize: 30}}><b>You are not logged in. Please login to create study groups!</b></p>
-      <ChakraProvider><Button marginTop="10px" colorScheme="blue" size='md' onClick={() => navigate('/login')}>
-        LOGIN
-      </Button></ChakraProvider>
-    </div>
-    
-  }
+      </div>
+      :
+      <div style={{ marginTop: 40, textAlign: 'center' }}>
+        <p style={{ fontSize: 30 }}>
+          <b>You are not logged in. Please login to create study groups!</b>
+        </p>
+        <Button variant="contained" color="primary" size="large" onClick={() => navigate('/login')}>
+          Login
+        </Button>
+      </div>
+     }
   </>
   );
 };
 
 export default CreateGroup;
-
-
-// import React, { useState, useEffect } from 'react';
-// import { Button } from '@mui/material';
-// import { useNavigate } from 'react-router-dom';
-// import { IoIosAdd } from "react-icons/io";
-// import './styles.css';
-
-// function CreateGroup() {
-//   const navigate = useNavigate();
-//   const [loggedIn, setLoggedIn] = useState(true); // is user logged in?
-  
-//   return (
-//     <>
-//         {loggedIn ? 
-//           <div style={{marginTop: 40}}>
-//             <Button variant="contained" color="primary" size="large" startIcon={<IoIosAdd />} onClick={() => navigate('/login')}>
-//               Create New Group
-//             </Button>
-//           </div> 
-//         : 
-//           <div style={{ marginTop: 40, textAlign: 'center' }}>
-//             <p style={{fontSize: 30}}><b>You are not logged in. Please login to create study groups!</b></p>
-//             <Button variant="contained" color="primary" size="large" onClick={() => navigate('/login')}>
-//               Login
-//             </Button>
-//           </div>
-//         }
-//     </>
-//   );
-// }
-
-// export default CreateGroup;

@@ -1,4 +1,3 @@
-// Profile.jsx
 import courseOptions from './courseOptions';
 import { useAuthContext } from '../hooks/useAuthContext';
 import React, { useState, useEffect } from 'react';
@@ -8,7 +7,6 @@ import { ChakraProvider, Text, FormControl, FormLabel, Input, Button, Center, VS
 import {useLogout} from '../hooks/useLogout';
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-// import 'react-toastify/dist/ReactToastify.css';
 
 function Profile() {
   const { user } = useAuthContext();
@@ -89,74 +87,72 @@ function Profile() {
   };
 
   return (
-    <>
+    <div px={0} style={{justifyContent:"center", alignItems:"center", display:"flex"}}>
     {user ?
-    <ChakraProvider>
-      <Center bg="#f0f9ff">
-        <VStack mt="20" spacing="4" align="center" justify="center" p="4" borderRadius="lg" boxShadow="lg" w="lg" maxW="100%" bg="whiteAlpha.800">
-          <Text fontSize="2xl" fontWeight="bold" mb="3">
-            Profile Settings
-          </Text>
+    <ChakraProvider px={0}>
+      <VStack mt="20" spacing="4" align="center" justify="center" p="4" borderRadius="lg" boxShadow="lg" w="lg" maxW="100%" >
+        <Text fontSize="2xl" fontWeight="bold" mb="3">
+          Profile Settings
+        </Text>
 
-          <form onSubmit={handleSubmit}>
-            <FormControl id="name" isRequired mb="3">
-              <FormLabel fontSize="lg">Full Name</FormLabel>
-              <Input
-                type="text"
-                name="name"
-                value={fullName}
-                onChange={(e) => setName(e.target.value)}
-                fontSize="lg"
-              />
-            </FormControl>
+        <form onSubmit={handleSubmit}>
+          <FormControl id="name" isRequired mb="3">
+            <FormLabel fontSize="lg">Full Name</FormLabel>
+            <Input
+              type="text"
+              name="name"
+              value={fullName}
+              onChange={(e) => setName(e.target.value)}
+              fontSize="lg"
+            />
+          </FormControl>
 
-            <FormControl id="username" isRequired mb="3">
-              <FormLabel fontSize="lg">Username</FormLabel>
-              <Input
-                type="text"
-                name="username"
-                value={userName}
-                onChange={(e) => setUsername(e.target.value)}
-                fontSize="lg"
-              />
-            </FormControl>
+          <FormControl id="username" isRequired mb="3">
+            <FormLabel fontSize="lg">Username</FormLabel>
+            <Input
+              type="text"
+              name="username"
+              value={userName}
+              onChange={(e) => setUsername(e.target.value)}
+              fontSize="lg"
+            />
+          </FormControl>
 
-            <FormControl id="email" isRequired mb="3">
-              <FormLabel fontSize="lg">Email</FormLabel>
-              <Input
-                type="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                fontSize="lg"
-              />
-            </FormControl>
+          <FormControl id="email" isRequired mb="3">
+            <FormLabel fontSize="lg">Email</FormLabel>
+            <Input
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              fontSize="lg"
+            />
+          </FormControl>
 
-            <FormControl id="courses" isRequired mb="3">
-              <FormLabel fontSize="lg">Courses</FormLabel>
-              <Select
-                value={transformedCourses}
-                options={courseOptions}
-                isMulti
-                onChange={(selectedOptions) => {
-                  setCourses(selectedOptions.map((option) => option.value));
-                  setTCourses(selectedOptions);
-                }}
-              />
-            </FormControl>
+          <FormControl id="courses" isRequired mb="3">
+            <FormLabel fontSize="lg">Courses</FormLabel>
+            <Select
+              value={transformedCourses}
+              options={courseOptions}
+              isMulti
+              onChange={(selectedOptions) => {
+                setCourses(selectedOptions.map((option) => option.value));
+                setTCourses(selectedOptions);
+              }}
+            />
+          </FormControl>
 
-            <Button type="submit" bg="#075985" colorScheme="blue" textColor="white" mt="4" fontSize="lg">
-              Save Profile
-            </Button>
-          </form>
-          <Button bg="#fc5858" colorScheme="red" textColor="white" mt="4" fontSize="lg" onClick={() => {
-            handleLogout();
-            navigate("/");
-            }}>
-              Logout
+          <Button type="submit" bg="#075985" colorScheme="blue" textColor="white" mt="4" fontSize="lg">
+            Save Profile
           </Button>
-        </VStack>
-      </Center>
+        </form>
+        <Button bg="#fc5858" colorScheme="red" textColor="white" mt="4" fontSize="lg" onClick={() => {
+          handleLogout();
+          navigate("/");
+          }}>
+            Logout
+        </Button>
+      </VStack>
 
       <Modal isOpen={isModalOpen} onClose={handleModalClose}>
         <ModalOverlay />
@@ -182,7 +178,7 @@ function Profile() {
       </Button></ChakraProvider>
     </div>
     }
-  </>
+  </div>
   );
 }
 
