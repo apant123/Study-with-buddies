@@ -22,11 +22,11 @@ import { useAuthContext } from "./useAuthContext"
             setError(json.error)
         }
         if (response.ok) {
-            // savc user to local storage
+            // save user to local storage
             localStorage.setItem('user', JSON.stringify(json))
             localStorage.setItem('userId', json.userId)
             
-            // update the auth context
+            // update auth context
             dispatch({type: 'LOGIN', payload: json})
 
             setIsLoading(false)

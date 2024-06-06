@@ -30,7 +30,6 @@ const loginUser = async (req, res) => {
     }
 }
 
-// test comment
 const signupUser = async (req, res) => {
     const { email, password, userName, fullName, courses } = req.body;
 
@@ -66,12 +65,10 @@ const signupUser = async (req, res) => {
     }
 }
 
-
 const getAllUsers = async (req, res) => {
     const users = await User.find({}).sort({createdAt: -1})
     res.status(200).json(users)
 }
-
 
 const getUsers = async(req, res) => {
     console.log("HEREHERERHERHRE");
@@ -105,11 +102,7 @@ const getUserById = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
-//added comment
-//added another comment
-// another test
-//Arav3
-//Arav4
+
 const getUserGroups = async(req, res) => {
     const userId = req.params.id
 
@@ -134,9 +127,7 @@ const getUserGroups = async(req, res) => {
         }
     } else {
         res.status(400).json({ error: 'Invalid user or group ID' });
-    }
-
-    
+    }  
 }   
 
 // add an event to a user's myEvents
@@ -144,7 +135,7 @@ const addGroup = async (req, res) => {
     const userId = req.params.id
     const groupId = req.body.myGroups; // Assuming you send the event ID in the request body
 
-    if (mongoose.Types.ObjectId.isValid(userId)){// && mongoose.Types.ObjectId.isValid(eventId)) {
+    if (mongoose.Types.ObjectId.isValid(userId)) {
         db.collection('users')
             .updateOne({_id: new ObjectId(userId)}, {$push: {myGroups: groupId}})
             .then(result =>{
@@ -182,15 +173,13 @@ const removeGroup = async (req, res) => {
       res.status(400).json({ error: 'Invalid user or group ID' });
     }
   };
-  
-
 
 // add an event to a user's myEvents
 const updateProfile = async (req, res) => {
     const userId = req.params.id
     const updates = req.body;
 
-    if (mongoose.Types.ObjectId.isValid(userId)){// && mongoose.Types.ObjectId.isValid(eventId)) {
+    if (mongoose.Types.ObjectId.isValid(userId)) {
         db.collection('users')
             .updateOne({_id: new ObjectId(userId)}, {$set: updates})
             .then(result =>{
@@ -220,14 +209,11 @@ const updateUser = async (req, res) => {
     res.status(200).json(group)
 }
 
-
-
 const getUsersbyCourse = async (req, res) => {
     console.log("Function getUsersbyCourse called");
     console.log("Here");
     console.log("Here");
     console.log("Here");
-   // console.log(course);
     const { course } = req.body;
     console.log("Course received:", course);
   
@@ -248,9 +234,6 @@ const getUsersbyCourse = async (req, res) => {
     }
   };
   
-  
-
-
 module.exports = { 
     loginUser, 
     signupUser, 
@@ -263,5 +246,4 @@ module.exports = {
     updateProfile,
     removeGroup,
     getUsersbyCourse
-    
 }

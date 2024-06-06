@@ -29,11 +29,6 @@ const userSchema = new Schema({
         type: Array,
         required: false
     },
-    
-    // [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Event' // Replace 'Event' with the name of your event model, if applicable
-    // }],
 
     groupsCreated: {
         type: Number,
@@ -71,13 +66,9 @@ userSchema.statics.signup = async function(email, password, userName, fullName, 
     if (!validator.isEmail(email)) {
         console.log('Invalid email')
     }
-    // if (!validator.isStrongPassword(password)) { throw Error ('Password weak')}
-    
-    // email exists
     
     const alreadyExists = await this.findOne({ email })
     if (alreadyExists) {
-        //console.log("Email already exists")
         throw Error('Email already exists')
     }
     // hashing password

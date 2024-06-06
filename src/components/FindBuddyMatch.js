@@ -1,19 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  Text,
-  SimpleGrid,
-  Skeleton,
-  ChakraProvider,
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-} from '@chakra-ui/react';
+import { Box, Text, SimpleGrid, Skeleton, ChakraProvider, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter} from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 
@@ -44,10 +30,10 @@ function FindUserMatch() {
         if (usersResponse.ok) {
           setMatchedUsers(usersData.users);
         } else {
-          console.error('API Error:', usersData); // Log any error response
+          console.error('API Error:', usersData);
         }
       } catch (error) {
-        console.error('Fetch Error:', error); // Log fetch-related errors
+        console.error('Fetch Error:', error);
       } finally {
         setLoading(false);
       }

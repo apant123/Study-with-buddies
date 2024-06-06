@@ -7,6 +7,7 @@ const getAllGroups = async (req, res) => {
     const groups = await Group.find({}).sort({createdAt: -1})
     res.status(200).json(groups)
 }
+
 const searchGroupsByCourse = async (req, res) => {
     const course = req.body;
     console.log(course);
@@ -23,10 +24,8 @@ const searchGroupsByCourse = async (req, res) => {
         res.status(200).json(groups)
     } catch (err) {
         console.error('Error searching for groups:', err.message);
-    } 
-   // res.status(200).json(groups)
+    }
 };
-
 
 // get a single group
 const getGroup = async (req, res) => {
@@ -43,7 +42,8 @@ const getGroup = async (req, res) => {
     }
 
     res.status(200).json(group)
-}
+};
+
 // create a new group
 const createGroup = async (req, res) => {
     const {groupname, course, description, meetingDay, location, meetingTime} = req.body
@@ -64,6 +64,7 @@ const createGroup = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 }
+
 // delete a event
 const deleteGroup = async (req, res) => {
     const { id } = req.params
@@ -78,6 +79,7 @@ const deleteGroup = async (req, res) => {
     }
     res.status(200).json(group)
 }
+
 // update a event
 const updateGroup = async (req, res) => {
     const id = req.params

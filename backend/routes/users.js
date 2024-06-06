@@ -9,7 +9,7 @@ const {
   getUsers,
   updateUser,
   addGroup,
-  getUserGroups, // Assuming this is imported correctly
+  getUserGroups,
   getAllUsers,
   getUserById,
   updateProfile,
@@ -29,7 +29,7 @@ route.patch('/addGroup/:id', addGroup);
 
 route.patch('/removeGroup/:id', removeGroup);
 
-route.get('/getUserGroups/:id', getUserGroups); // Assuming this is the correct function name
+route.get('/getUserGroups/:id', getUserGroups);
 
 route.get('/getAllUsers', getAllUsers);
 

@@ -9,7 +9,7 @@ function FindBuddy() {
   const navigate = useNavigate();
   const { user } = useAuthContext();
   const [course, setCourse] = useState('');
-const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const handleChange = (event) => {
     setCourse(event.target.value);
@@ -17,15 +17,12 @@ const [users, setUsers] = useState([]);
 
   const findUsers = async (course) => {
     try {
-      /*const response = await axios.post('/api/groups/search', { course }); // Adjust the endpoint as necessary
-      const groups = response.data;
-      */
       const response = await fetch('/api/user/findbuddy', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ course }), // Sending course as a string
+        body: JSON.stringify({ course }),
       });
 
       console.log(response)
@@ -43,8 +40,6 @@ const [users, setUsers] = useState([]);
           console.log(`- User: ${user.name}, Course: ${user.course}`);
         });
         setUsers(users)
-        // Navigate to the groups page or handle the group data as needed
-        //navigate(`/${course}`); // Adjust this to your needs
       } else {
         console.log(`No users found for course "${course}".`);
         alert(`No users found for course "${course}".`);
@@ -108,8 +103,6 @@ const [users, setUsers] = useState([]);
               </Box>
             ))}
           </Box>)}
-
-        
         </div>
       ) : (
         <div style={{ marginTop: 40, textAlign: 'center' }}>

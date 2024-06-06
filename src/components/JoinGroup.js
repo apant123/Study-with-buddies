@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Stack, InputLabel, MenuItem, Select, FormControl, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Import axios for making HTTP requests
+import axios from 'axios';
 import './styles.css';
 import { useAuthContext } from "../hooks/useAuthContext";
 import courseOptions from './courseOptions';
@@ -46,7 +46,7 @@ function JoinGroup() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ course }), // Sending course as a string
+        body: JSON.stringify({ course }),
       });
 
       if (!response.ok) {

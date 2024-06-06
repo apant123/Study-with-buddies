@@ -3,7 +3,7 @@ import { useAuthContext } from "./useAuthContext";
 
 export const useSignup = () => {
     const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false); // Changed to false instead of null
+    const [isLoading, setIsLoading] = useState(false);
     const { dispatch } = useAuthContext();
 
     const signup = async (email, password, userName, fullName, courses) => {
@@ -17,7 +17,7 @@ export const useSignup = () => {
         setError(null);
         console.log(JSON.stringify({ email, password, userName, fullName, courses }));
 
-        const response = await fetch('/api/user/signup', { // backend/routes/users
+        const response = await fetch('/api/user/signup', { 
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password, userName, fullName, courses })
@@ -28,12 +28,10 @@ export const useSignup = () => {
         if (!response.ok) {
             setIsLoading(false);
             setError(json.error);
-            return { error: json.error }; // Return the error for handling in the component
+            return { error: json.error };
         }
 
-
         if (response.ok) {
-            // Save user to local storage
             localStorage.setItem('user', JSON.stringify(json));
             localStorage.setItem('userId', json.userId);
             console.log(localStorage.getItem('userId'));

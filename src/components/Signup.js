@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useSignup } from "../hooks/useSignup";
 import { useNavigate } from 'react-router-dom';
 import courseOptions from './courseOptions';
-
 import {
   Container,
   Stack,
@@ -76,16 +75,11 @@ function Signup() {
     // If no validation errors, proceed with signup
     const response = await signup(email, password, userName, fullName, courses);
 
-
-    //If no validation errors, proceed with signup
-
     if (response && response.error) {
-      alert(response.error); // Show alert if there is an error from the server
+      alert(response.error);
     } else {
       navigate('/login');
     }
-    
-
   };
 
   return (
