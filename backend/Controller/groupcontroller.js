@@ -65,7 +65,7 @@ const createGroup = async (req, res) => {
     }
 }
 
-// delete a event
+// delete a group
 const deleteGroup = async (req, res) => {
     const { id } = req.params
 
@@ -80,7 +80,7 @@ const deleteGroup = async (req, res) => {
     res.status(200).json(group)
 }
 
-// update a event
+// update a group
 const updateGroup = async (req, res) => {
     const id = req.params
     const updates = req.body

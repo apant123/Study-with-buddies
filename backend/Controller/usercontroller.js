@@ -106,7 +106,7 @@ const getUserById = async (req, res) => {
 const getUserGroups = async(req, res) => {
     const userId = req.params.id
 
-    if (mongoose.Types.ObjectId.isValid(userId)){// && mongoose.Types.ObjectId.isValid(eventId)) {
+    if (mongoose.Types.ObjectId.isValid(userId)){
         try {
             const user = await User.findById(userId);
         
@@ -114,10 +114,10 @@ const getUserGroups = async(req, res) => {
               throw new Error('User not found');
             }
         
-            const groupIds = user.myGroups; // Assuming myGroups is an array of event IDs
+            const groupIds = user.myGroups; // Assuming myGroups is an array of group IDs
             console.log('groupIds', groupIds)
         
-            // Assuming you have an Event model with group information
+            // Assuming you have an group model with group information
             const Group = require('../models/groupModel'); // Replace with the actual path to your group model
             const groups = await Group.find({ _id: { $in: groupIds } });
             console.log('groups', groups)
@@ -130,10 +130,10 @@ const getUserGroups = async(req, res) => {
     }  
 }   
 
-// add an event to a user's myEvents
+// add a group to a user's myGroups
 const addGroup = async (req, res) => {
     const userId = req.params.id
-    const groupId = req.body.myGroups; // Assuming you send the event ID in the request body
+    const groupId = req.body.myGroups; // Assuming you send the group ID in the request body
 
     if (mongoose.Types.ObjectId.isValid(userId)) {
         db.collection('users')
@@ -149,7 +149,7 @@ const addGroup = async (req, res) => {
     }
 };
 
-// add an event to a user's myEvents
+// add an group to a user's myGroups
 const removeGroup = async (req, res) => {
     const userId = req.params.id;
     const groupId = req.body.myGroups; // Assuming you send the group ID in the request body
@@ -174,7 +174,7 @@ const removeGroup = async (req, res) => {
     }
   };
 
-// add an event to a user's myEvents
+// add  group  to a user's myGRoupss
 const updateProfile = async (req, res) => {
     const userId = req.params.id
     const updates = req.body;
