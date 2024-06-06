@@ -44,59 +44,31 @@ Main backend dependencies:
 #### Secrets
 Create a `.env` file in the backend folder with the following contents:
 ```
-DB_URL=mongodb+srv://jason:ogrdmalus@cluster0.5dxdz.mongodb.net
-DB_NAME=RendeYou_test_<YOUR NAME HERE>
-SESSION_SECRET=abcd1234
-ENV=dev
-PORT=8000
-CHECK_PERIOD_MIN=120
-SESSION_LIFETIME_MIN=60
+SECRET=aravpant
+MONGO_URI=mongodb+srv://aravpant17:E9lDK3ziORyTkPJM@35l.3doatcn.mongodb.net/?retryWrites=true&w=majority&appName=35L
 ```
 
-Important: write your name at the end of `DB_NAME` (e.g. I have `RendeYou_test_jason`). This way, we can have separate testing databases.
+#### Running Backend
+```
+npm run server
+```
+The backend server will be available on http://localhost:4000.
 
-The `SESSION_SECRET` value can be anything you want (for testing purposes). If you want to generate a proper secret key, run:
-```
-openssl rand -hex 64
-```
-
-This line:
-```
-ENV=dev
-```
-controls backend settings such as allowed frontend origins.
-
-#### Running
-```
-cd backend
-npm start
-```
-The backend server will be available on http://localhost:8000. The root document will display a bare-bones testing page.
-
-### Frontend Instructions
 #### Setup
-To setup the dependencies for the frontend application, run:
+To setup the dependencies for the frontend and backend application, run:
 ```
-cd frontend
-npm install
+npm install -legacy-peer-deps
 ```
-which should download a set of `node_modules` for the backend server.
+which should download a set of `node_modules` for the backend server and frontend servers
 
 Main frontend dependencies:
 - React.js
 - react-router-dom - simulates paths for different pages
 
-#### Configuration
-If you are testing the frontend with a local instance of the backend, run this command from the project root:
-```
-sed -i 's/ENV: "production"/ENV: "dev"/' frontend/src/settings.js
-```
-This will ensure that the frontend is configured to use the local backend, instead of our hosted backend (which will not allow your local frontend to connect).
 
-#### Running
+#### Running Frontend
 To start the frontend application, run:
 ```
-cd frontend
 npm start
 ```
 The frontend will be available on http://localhost:3000, which should appear in your browser automatically.
