@@ -52,7 +52,7 @@ To start the project application, run:
 ```
 npm start
 ```
-Since we have the concurrently package, this command will start up the backend and the frontend at the same time. 
+Since we have the concurrently package, this command will start up the backend and the frontend servers at the same time. 
 
 
 ## Authors
