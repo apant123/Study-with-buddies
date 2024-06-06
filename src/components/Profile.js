@@ -26,7 +26,7 @@ function Profile() {
   const handleLogout = () => {
     logout();
   }
-
+// added test comment
   useEffect(() => {  
     
     const fetchProfile = async () => {
