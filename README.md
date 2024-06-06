@@ -45,16 +45,10 @@ SECRET=aravpant
 MONGO_URI=mongodb+srv://aravpant17:E9lDK3ziORyTkPJM@35l.3doatcn.mongodb.net/?retryWrites=true&w=majority&appName=35L
 ```
 
-#### Running Backend
-```
-npm run server
-```
-The backend server will be available on http://localhost:4000.
-
 #### Setup
 To setup the dependencies for the frontend and backend application, run:
 ```
-npm install -legacy-peer-deps
+npm install --legacy-peer-deps or npm install
 ```
 which should download a set of `node_modules` for the backend server and frontend servers
 
@@ -62,13 +56,12 @@ Main frontend dependencies:
 - React.js
 - react-router-dom - simulates paths for different pages
 
-
-#### Running Frontend
-To start the frontend application, run:
+#### Running Project
+To start the project application, run:
 ```
 npm start
 ```
-The frontend will be available on http://localhost:3000, which should appear in your browser automatically.
+Since we have the concurrently package, this command will start up the backend and the frontend at the same time. 
 
 
 ## Authors
