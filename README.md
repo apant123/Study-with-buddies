@@ -1,3 +1,4 @@
+## StudyWithBuddies
 StudyWithBuddies is a **MERN Stack** full stack web application that connects users with an emphasis on immediate meetups with friends.
 
 
@@ -104,4 +105,4 @@ The frontend will be available on http://localhost:3000, which should appear in 
 The Extras page ([https://rendeyou.bliu.tech/#/extras](https://rendeyou.bliu.tech/#/extras)) contains the zip file for the Chrome extension. Open Chrome and navigate to `chrome://extensions`. Turn on developer mode at the top right of the screen, and click on "Load Unpacked" in the toolbar that should have just displayed. Navigate inside the "Load Unpacked" navigation filesystem to you unzipped file fo the extension and select the ```dist``` folder inside to load into Chrome. If you click on your Chrome extensions, the RendeYou extension should be there for you to login and use.
 
 ## Authors
-_RendeYou_ was made as a project for **CS 35L** taught by Professor Paul Eggert at UCLA in Winter 2022. **Made by**: Benson Liu, Connor Pedersen, Jason Cheng, Ming Zhu, & Rishab Khurana.
+StudyWithBuddies was made as a project for **CS 35L** taught by Professor Paul Eggert at UCLA in Spring 2024. **Made by**: Anish Goswami, Ryan Tang, Sunny Vinay, Krishna Kumanan, Arav Pant
