@@ -10,7 +10,7 @@ StudyWithBuddies is a **MERN Stack** full stack web application that connects us
 
 ## Features
 
-- **Creating Study Groups:** Our website allows users to create their own study groups. They can specify the course for which the study group is for. They can also set a day and time which the study group can meet at every week. 
+- **Creating Study Groups:** Our website allows users to create their own study groups, specifying the course for which the study group is for while setting the time to meet, the day to meet, location to meet, a group name, and a group description. 
 - **Finding Study Groups** Users can find study groups to join by searching for study groups based on a certain course. This allows users to quickly and easily find study groups to join. 
 - **Joining Study Groups:** Users can join study groups after they found one which matches a course they are taking and meet a time which they are availibe. 
 - **Finding Study Buddies:** Users can use our website to find other users who are taking the same courses as them. Our website displyas their contact informaitno which users can use to reach out and study with. 
@@ -23,7 +23,7 @@ StudyWithBuddies is a **MERN Stack** full stack web application that connects us
  - MongoDB <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/MongoDB_Logo.png/1598px-MongoDB_Logo.png?20180423174357" alt="MongoDB" height="30px">
 
 ## Setup
-In order to run a local instance of RendeYou, first clone or download a copy of this repository. Follow the instructions below to initialize a local instance of each part of the application.
+In order to run a local instance of StudyWithBuddies, first clone or download a copy of this repository. Follow the instructions below to initialize a local instance of each part of the application.
 
 ### Backend Instructions
 #### Setup
