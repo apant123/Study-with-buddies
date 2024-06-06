@@ -18,16 +18,12 @@ StudyWithBuddies is a **MERN Stack** full stack web application that connects us
 ## Technologies
  - Javascript <img src="https://seeklogo.com/images/J/javascript-logo-8892AEFCAC-seeklogo.com.png" alt="javascript" width="30px">
  - Node.js <img src="https://seeklogo.com/images/N/nodejs-logo-FBE122E377-seeklogo.com.png" alt="node.js" width="30px">
- - React.js <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js[text](vscode-file://vscode-app/Applications/Visual%20Studio%20Code.app/Contents/Resources/app/out/vs/code/electron-sandbox/workbench/workbench.html)_logo-512.png" alt="react.js" width="30px">
+ - React.js <img src="[https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js[text](vscode-file://vscode-app/Applications/Visual%20Studio%20Code.app/Contents/Resources/app/out/vs/code/electron-sandbox/workbench/workbench.html)_logo-512.png](https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AReact-icon.svg&psig=AOvVaw15qHgbDnqia396jQ-U23w_&ust=1717799119602000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPj-lsSCyIYDFQAAAAAdAAAAABAE)" alt="react.js" width="30px">
  - Express.js <img src="https://www.sohamkamani.com/static/65137ed3c844d05124dcfdab28263c21/38cea/express-routing-logo.png" alt="Express.js" height="30px">
  - MongoDB <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/MongoDB_Logo.png/1598px-MongoDB_Logo.png?20180423174357" alt="MongoDB" height="30px">
 
 ## Setup
 In order to run a local instance of StudyWithBuddies, first clone or download a copy of this repository. Follow the instructions below to initialize a local instance of each part of the application.
-
-Main backend dependencies:
-- Express.js - the web server library which powers everything
-- Mongoose - an object-document mapping library for MongoDB
 
 #### Secrets
 Create a `.env` file in the backend folder with the following contents:
@@ -46,6 +42,10 @@ which should download a set of `node_modules` for the backend server and fronten
 Main frontend dependencies:
 - React.js
 - react-router-dom - simulates paths for different pages
+
+Main backend dependencies:
+- Express.js - the web server library which powers everything
+- Mongoose - an object-document mapping library for MongoDB
 
 #### Running Project
 To start the project application, run:
