@@ -20,6 +20,9 @@ StudyWithBuddies is a **MERN Stack** full stack web application that connects us
  - React.js <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" alt="react.js" width="30px">
  - Express.js <img src="https://www.sohamkamani.com/static/65137ed3c844d05124dcfdab28263c21/38cea/express-routing-logo.png" alt="Express.js" height="30px">
  - MongoDB <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/MongoDB_Logo.png/1598px-MongoDB_Logo.png?20180423174357" alt="MongoDB" height="30px">
+ - MaterialUI
+ - Chakra
+ - Bycrypt
 
 ## Setup
 In order to run a local instance of RendeYou, first clone or download a copy of this repository. Follow the instructions below to initialize a local instance of each part of the application.
