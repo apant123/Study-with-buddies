@@ -25,15 +25,6 @@ StudyWithBuddies is a **MERN Stack** full stack web application that connects us
 ## Setup
 In order to run a local instance of StudyWithBuddies, first clone or download a copy of this repository. Follow the instructions below to initialize a local instance of each part of the application.
 
-### Backend Instructions
-#### Setup
-To setup the dependencies for the backend server, run:
-```
-cd backend
-npm install
-```
-which should download a set of `node_modules` for the backend server.
-
 Main backend dependencies:
 - Express.js - the web server library which powers everything
 - Mongoose - an object-document mapping library for MongoDB
