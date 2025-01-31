@@ -75,14 +75,24 @@ function Profile() {
           'Content-Type': 'application/json',
         },
       });
-
+      
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        const errorMessage = await response.json();
+        if (errorMessage.error === "This email already exists") {
+          throw new Error("This email already exists");
+        } else {
+          throw new Error("Network response was not ok");
+      }
       } else {
         setIsModalOpen(true);
       }
     } catch (error) {
-      console.error('Failed to update user');
+      console.error(error.message)
+      if (error.message === "This email already exists"){
+        alert("The email you entered is already in use. Please try another.");
+      } else {
+        console.error('Failedasdfasd to update user');
+      }
     }
   };
 

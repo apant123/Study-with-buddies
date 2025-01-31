@@ -7,6 +7,7 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true,
+        lowercase: true,
         unique: true
     },
     password: {
@@ -30,11 +31,11 @@ const userSchema = new Schema({
         required: false
     },
 
-    groupsCreated: {
-        type: Number,
-        required: true,
-        default: 0
-    }
+    // groupsCreated: {
+    //     type: Number,
+    //     required: true,
+    //     default: 0
+    // }
 }, { timestamps: true })
 
 userSchema.statics.login = async function(email, password) {
@@ -56,6 +57,7 @@ userSchema.statics.login = async function(email, password) {
 }
 
 // static signup
+// want to keep 'controllers' for HTTP and schema for "business logic"
 userSchema.statics.signup = async function(email, password, userName, fullName, courses) {
     // data validation
     
@@ -76,19 +78,40 @@ userSchema.statics.signup = async function(email, password, userName, fullName, 
     const hash = await bcrypt.hash(password, uniquify)
     
     const userData = await this.create({ email, password: hash, userName, fullName, courses})
-    
+    // 'this' referes to the model not a specific instance of the schema
     return userData
 }
 
-userSchema.statics.findMatches = async function(userCourses) {
-    const users = await this.find({
-        courses: { $in: userCourses }
-    });
-    const result = [];
-    await users.forEach(user => {
-      result.push(user);
-    });
-    return result;
-}
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('User', userSchema) // creates model
+// we point to User collection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// userSchema.statics.findMatches = async function(userCourses) { // not needed
+//     const users = await this.find({
+//         courses: { $in: userCourses }
+//     });
+//     const result = [];
+//     await users.forEach(user => {
+//       result.push(user);
+//     });
+//     return result;
+// }

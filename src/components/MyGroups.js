@@ -17,7 +17,7 @@ function MyGroups() {
 
       const response2 = await fetch(`/api/user/removeGroup/${userId}`, {
         method: 'PATCH',
-        body: JSON.stringify(jsonId),
+        body: JSON.stringify(jsonId), // sends groupID in JSON format
         headers: {
           'Content-Type': 'application/json',
         },
@@ -86,6 +86,7 @@ function MyGroups() {
                 <Typography>Time: {group.meetingTime}</Typography>
                 <Typography>Location: {group.location}</Typography>
                 <Typography>Description: {group.description}</Typography>
+                <Typography>People Coming: {Array.from(new Set(group.usersAssociated)).length}</Typography>
                 <Button style={{ backgroundColor: "#e53e3e", marginTop: "10px"}}
                   variant="contained"
                   size="small"

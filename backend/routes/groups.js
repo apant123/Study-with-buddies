@@ -1,30 +1,52 @@
 const express = require('express');
 const Group = require('../models/groupModel')
-
-
-
 const route = express.Router()
 
 
 const {
    createGroup,
-   getGroup,
-   getAllGroups,
-   deleteGroup,
-   updateGroup,
    searchGroupsByCourse
 } = require('../Controller/groupcontroller')
 
-route.get('/', getAllGroups)
 
-route.get('/:id', getGroup)
-  
 route.post('/search', searchGroupsByCourse)
 
-route.post('/', createGroup)
-  
-route.delete('/:id', deleteGroup)
-  
-route.patch('/:id', updateGroup)
-  
+route.post('/createGroup/:id', createGroup)
+
 module.exports = route
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//route.get('/', getAllGroups) // prolly don't need
+
+//route.get('/:id', getGroup) // prolly don't need
+  
+//route.delete('/:id', deleteGroup) // prolly don't need
+  
+//route.patch('/:id', updateGroup) // prolly don't need
+
+   //getGroup,
+   //getAllGroups,
+   //deleteGroup,
+   //updateGroup,
+  
+
+

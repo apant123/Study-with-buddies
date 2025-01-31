@@ -29,19 +29,32 @@ function JoinGroup() {
       });
 
       if (!response2.ok) {
-        throw new Error('Network response was not ok');
-      }
 
+        const errorMessage = await response2.json();
+        if (errorMessage.error === "You've already joined this group"){
+          throw new Error("You've already joined this group")
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      }
       const updatedUser = await response2.json();
+      alert("You joined the Group!")
       console.log('User updated:', updatedUser);
+      return true;
     } catch (error) {
-      console.error('Failed to add to group:', error);
+      if (error.message === "You've already joined this group"){
+        alert("You've already joined this group")
+        console.error("You've already joined this group", error);
+      } else{
+        console.error('Failed to add to group:', error);
+      }
+      return false;
     }
   };
 
   const findGroup = async (course) => {
     try {
-      const response = await fetch('/api/groups/search', {
+      const response = await fetch('/api/groups/search', { // request
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,9 +65,8 @@ function JoinGroup() {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
       const groups = await response.json();
-      console.log(groups);
+      console.log("printing: ", groups.length)
 
       if (groups.length > 0) {
         console.log(`Groups found for course "${course}":`);
@@ -121,12 +133,22 @@ function JoinGroup() {
                   <Typography><em>Time:</em> {group.meetingTime}</Typography>
                   <Typography><em>Location:</em> {group.location}</Typography>
                   <Typography><em>Description:</em> {group.description}</Typography>
+                  <Typography>People Coming: {group.usersAssociated.length}</Typography>
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => {
-                      addToGroup(group._id);
-                      navigate('/mygroups');}} // Pass the group ID to addToGroup function
+                    onClick={async () => {
+                      try{
+                        const success = await addToGroup(group._id);
+                        if (success){
+                          navigate('/mygroups'); // Pass the group ID to addToGroup function
+                        }
+                      }
+                       catch(error){
+                        console.log()
+                      }
+                      } }
+                  
                     sx={{marginTop:"5px"}}
                   >
                     Join Group

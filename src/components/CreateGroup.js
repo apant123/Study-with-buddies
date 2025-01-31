@@ -6,7 +6,7 @@ import { Stack, Button, Select, TextField, Typography, MenuItem } from '@mui/mat
 import 'react-datepicker/dist/react-datepicker.css';
 import { useAuthContext } from "../hooks/useAuthContext";
 import './DatePickerStyle.css';
-
+//finished rewriting
 const CreateGroup = () => {
   const [groupname, setGroupName] = useState(''); // Group name
   const [course, setCourse] = useState(''); // Course that group belongs to
@@ -64,7 +64,7 @@ const CreateGroup = () => {
       meetingTime: meetingTime ? meetingTime.toLocaleTimeString() : null,
     };
 
-    const response = await fetch('/api/groups', {
+    const response = await fetch(`/api/groups/createGroup/${userId}`, {
       method: 'POST',
       body: JSON.stringify(newGroup),
       headers: {
@@ -73,20 +73,21 @@ const CreateGroup = () => {
     });
 
     const json = await response.json();
+    console.log("Here")
     console.log(json._id)
-    
+    console.log(json)
     const groupId = json._id;
     const jsonId = {myGroups: groupId}
-    console.log(JSON.stringify(jsonId))
+    // console.log(JSON.stringify(jsonId))
 
-    if (!response.ok) {
+    if (!response.ok) { // recieved an error in the response
       setError(json.error);
     }
-    if (response.ok) {
+    if (response.ok) { //now we want to add the group into the User's Groups
       try {
         const response2 = await fetch(`/api/user/addGroup/${userId}`, {
-          method: 'PATCH',
-          body: JSON.stringify(jsonId),
+          method: 'PATCH', // partially update data
+          body: JSON.stringify(jsonId), // sending Group ID to put into User's Groups
           headers: {
             'Content-Type': 'application/json',
           },

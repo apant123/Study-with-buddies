@@ -15,7 +15,9 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
+    "caniuse-lite": "^1.0.30001695",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "framer-motion": "^11.2.10",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.7.0",
@@ -31,11 +33,13 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "concurrently": "^8.0.1"
+    "@types/node": "^22.10.10",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.9"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "node backend/server.js",
+    "server": "nodemon backend/server.js",
     "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
