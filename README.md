@@ -1,7 +1,6 @@
 ## StudyWithBuddies
 StudyWithBuddies is a **MERN Stack** full stack web application that connects users with study groups and study buddies so that they can succeed in class!
 
-
 ## Table of Contents
 - [Features](https://github.com/SunnyGotSkillz/study-with-buddies/#features)
 - [Technologies](https://github.com/SunnyGotSkillz/study-with-buddies/#technologies)
